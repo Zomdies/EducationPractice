@@ -10,6 +10,7 @@ import floor2Image from './Image/Floor2.png'
 import floor3Image from './Image/Floor3.png'
 import infoImage from './Image/Info.png'
 import mapImage from './Image/Map.png'
+import mapBgImage from './Image/MapBg.png'
 import MainScreenBox from './Components/MainScreenBox'
 import LineLabels from './Components/LineLabels'
 
@@ -77,8 +78,19 @@ ReactDOM.render(
       contenMarginTop={120}
     >      
     </MainScreenBox>
+    <MainScreenBox 
+      image={mapBgImage}
+      header=
+      {
+        <p>
+        MAP
+        </p> 
+      }
+      contenMarginTop={120}
+    >      
+    </MainScreenBox>
     <LineLabels 
-      labels="WELCOME,FLOOR 1,FLOOR 2,FLOOR 3,INFORMATION" 
+      labels="WELCOME,FLOOR 1,FLOOR 2,FLOOR 3,INFORMATION,MAP" 
       labelSize="36px" 
       pageCount={5} 
       pageHeight={1280} 
