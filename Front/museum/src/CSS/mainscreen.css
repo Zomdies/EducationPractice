@@ -1,0 +1,68 @@
+
+.block-header 
+{
+    font-size: 96px;
+    line-height: 110px;
+
+    width: fit-content;
+    margin: 0;
+    position: relative;
+    top: 60px;
+    left: 160px;
+
+    text-shadow: 0px 0px 60px rgba(0, 0, 0, 0.8);
+}
+
+.block-header p{
+    margin: 0;
+}
+
+.block-content
+{
+    font-size: 46px;
+    line-height: 65px;
+    width: fit-content;
+    position: relative;
+    margin: 0;
+    left: 160px;
+
+    text-shadow: 0px 0px 60px rgba(0, 0, 0, 0.8);
+}
+
+
+.background-image
+{
+    height: 1280px !important;
+    background-size: cover; 
+    box-shadow: inset 0px 0px 250px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+.floor-box
+{
+    width: 665px;
+    height: 265px;    
+
+    background: #545454;
+    border: 5px solid #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: 5px 5px 20px #000000;
+    border-radius: 15px;
+}
+
+@font-face 
+{
+    font-family: Oswald; 
+    src: url(../Font/static/Oswald-Regular.ttf); 
+}
+
+body{    
+    --color-dark: #545454;
+    --color-light: #767575;
+    --color-wihte: #FFFFFF;
+    background-color: var(--color-dark);
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    color: #FFFFFF;
+}
