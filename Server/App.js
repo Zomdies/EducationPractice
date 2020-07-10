@@ -11,9 +11,10 @@ mongoose.connect(config.url,{ useUnifiedTopology: true,  useNewUrlParser: true }
 const floorRoutes = require('./api/routes/Floor');
 const hallRoutes = require('./api/routes/Hall');
 const exhibitRoutes = require('./api/routes/Exhibit');
-const expositionRoutes = require('./api/routes/Exposotion');
+const expositionRoutes = require('./api/routes/Exposition');
 const lineLogRoutes = require('./api/routes/LineLog');
 const userRoutes = require('./api/routes/User');
+// const anyRoutes = require('./api/routes/AnyRoutes');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -26,5 +27,6 @@ app.use('/exhibit', exhibitRoutes);
 app.use('/exposition', expositionRoutes);
 app.use('/user', userRoutes);
 app.use('/linelog', lineLogRoutes);
+// app.use('/', anyRoutes);
 
 module.exports = app;

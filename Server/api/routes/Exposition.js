@@ -2,16 +2,14 @@ const express = require('express');
 const route = express.Router();
 const mongooes = require('mongoose');
 
-const LineLog = require('../models/LineLog');
-const Exhibit = require('../models/Exhibit');
 const Exposition = require('../models/Exposition')
 
-// GET LineLog // Need to get all LineLog or LineLog by _id
+// GET Exposition // Need to get all Exposition or Exposition by _id
 route.get('/',(req,res,next)=>{
     const getOps = {};
     if (req.body["_id"]) 
         getOps["_id"] = req.body._id;
-    LineLog.find(getOps)
+    Exposition.find(getOps)
     .then(result =>{
         res.status(200).json({
             result : result
@@ -24,12 +22,11 @@ route.get('/',(req,res,next)=>{
     });
 });
 
-// POST LineLog // Need to creater LineLog
-route.post('/', async (req,res,next) =>{
+// POST Exposition // Need to creater Exposition
+route.post('/', (req,res,next) =>{
     var postOps = {};
-    for (param in LineLog.schema.paths){
-        
-        if (param !== '_id' && param !== '__v' && param !== 'Date_Note') //&& param !== 'ID_Exhibit' && param !== 'ID_Exposition'
+    for (param in Exposition.schema.paths){
+        if (param !== '_id' && param !== '__v')
         if (req.body[param] !== undefined){
             postOps[param] = req.body[param];
         }else{
@@ -40,28 +37,9 @@ route.post('/', async (req,res,next) =>{
             break;
         };
     };
-    await Exposition.findOne({ _id : postOps.ID_Exposition})
-    .exec()
-    .catch(err =>{
-        res.status(500).json({
-            message : "Error Exposition with ID_Exposition not found",
-            error : err
-        });
-        res.send();
-    });
-    await Exhibit.findOne({ _id : postOps.ID_Exhibit})
-    .exec()
-    .catch(err =>{
-        res.status(500).json({
-            message : "Error Exhibit with ID_Exhibit not found",
-            error : err
-        });
-        res.send();
-    });
     postOps["_id"] = new mongooes.Types.ObjectId;
-    postOps["Date_Note"] = new Date().toString();
-    const lineLog = new LineLog(postOps);
-    lineLog.save()
+    const exposition = new Exposition(postOps);
+    exposition.save()
     .then(result =>{
         res.status(200).json({
             message : 'Object created',
@@ -76,14 +54,15 @@ route.post('/', async (req,res,next) =>{
     });
 });
 
-// PATH LineLog // Need to update atribute in LineLog
+// PATH Exposition // Need to update atribute in Exposition
 route.patch('/', (req,res,next) =>{
     const updateOps = {};
     for (param in req.body){
         if (param !== "_id")
             updateOps[param] = req.body[param];
     }
-    LineLog.updateOne({_id : req.body._id},{ $set: updateOps })
+    console.log(updateOps);
+    Exposition.updateOne({_id : req.body._id},{ $set: updateOps })
     .exec()
     .then(result =>{
             if (result["n"] === 0){
@@ -106,9 +85,9 @@ route.patch('/', (req,res,next) =>{
         });
 });
 
-// DELETE LineLog // Need to delete LineLog
+// DELETE Exposition // Need to delete Exposition
 route.delete('/',(req,res,next)=>{
-    LineLog.deleteOne({ _id : req.body._id})
+    Exposition.deleteOne({ _id : req.body._id})
     .exec()
     .then(result =>{
         if (result["n"] === 0){

@@ -7,4 +7,4 @@ const userSchema = new mongooes.Schema({
     Hash : String //Type of hash
 });
 
-module.exports = mongooes.model('Linelog', lineLogSchema);
+module.exports = mongooes.model('User', userSchema);

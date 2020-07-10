@@ -4,9 +4,12 @@ const mongooes = require('mongoose');
 
 const Floor = require('../models/Floor');
 
-// GET Floor // Need to get all floor
+// GET Floor // Need to get information about floor
 route.get('/',(req,res,next)=>{
-    Floor.find({ _id : req.body._id})
+    const getOps = {};
+    if (req.body["_id"]) 
+        getOps["_id"] = req.body._id;
+    Floor.find(getOps)
     .then(result =>{
         res.status(200).json({
             result : result
@@ -43,6 +46,7 @@ route.post('/', (req,res,next) =>{
 
 })
 
+// PATH Floor // Need to update Floor
 route.patch('/', (req,res,next) =>{
     const updateOps = {
         Name : req.body.Name
@@ -70,6 +74,7 @@ route.patch('/', (req,res,next) =>{
     });
 });
 
+// DELETE Floor // Need to delete Floor
 route.delete('/',(req,res,next)=>{
     Floor.deleteOne({ _id : req.body._id})
     .exec()
