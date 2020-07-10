@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import styles from './CSS/mainscreen.css';
 import './CSS/mainscreen.css'
 import welcomImage from './Image/Welcome.png'
 import floor1Image from './Image/Floor1.png'
@@ -13,6 +12,7 @@ import mapImage from './Image/Map.png'
 import mapBgImage from './Image/MapBg.png'
 import MainScreenBox from './Components/MainScreenBox'
 import LineLabels from './Components/LineLabels'
+import about from './MainStrings'
 
 
 ReactDOM.render(
@@ -23,7 +23,7 @@ ReactDOM.render(
       header=
       {
         <p>
-        WELCOM<br/>To the Museum
+        WELCOME<br/>To the Museum
         </p> 
       } 
       content=
@@ -42,7 +42,66 @@ ReactDOM.render(
         HALLS<br/>On Floor 1
         </p> 
       }
-      contenMarginTop={120}
+      contenMarginTop={220}
+      content=
+      {
+        <div className="floor-box">
+          <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 3,
+            gridColumnStart: 1,   
+            gridColumnEnd: 5,
+            }}><p>Hall 1</p></div>
+           <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 3,
+            gridColumnStart: 5,   
+            gridColumnEnd: 8,
+            }}><p>Hall 2</p></div>
+            <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 3,
+            gridColumnStart: 8,   
+            gridColumnEnd: 11,
+            }}><p>Hall 3</p></div>
+            <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 3,
+            gridColumnStart: 11,   
+            gridColumnEnd: 14,
+            }}><p>Hall 4</p></div>
+            <div className="hall" style={{
+            gridRowStart: 3, 
+            gridRowEnd: 5,
+            gridColumnStart: 1,   
+            gridColumnEnd: 3,
+            }}><p>Hall 5</p></div>
+            <div className="hall" style={{
+            gridRowStart: 5, 
+            gridRowEnd: 7,
+            gridColumnStart: 1,   
+            gridColumnEnd: 4,
+            }}><p>Hall 6</p></div>
+            <div className="hall" style={{
+            gridRowStart: 3, 
+            gridRowEnd: 5,
+            gridColumnStart: 7,   
+            gridColumnEnd: 11,
+            }}><p>Hall 7</p></div>
+            <div className="hall" style={{
+            gridRowStart: 5, 
+            gridRowEnd: 7,
+            gridColumnStart: 8,   
+            gridColumnEnd: 11,
+            }}><p>Hall 8</p></div>
+            <div className="hall" style={{
+            gridRowStart: 3, 
+            gridRowEnd: 7,
+            gridColumnStart: 11,   
+            gridColumnEnd: 14,
+            }}><p>Hall 9</p></div>
+        </div>
+      } 
     >      
     </MainScreenBox>
     <MainScreenBox 
@@ -53,7 +112,66 @@ ReactDOM.render(
         HALLS<br/>On Floor 2
         </p> 
       }
-      contenMarginTop={120}
+      contenMarginTop={220}
+      content=
+      {
+        <div className="floor-box">
+          <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 5,
+            gridColumnStart: 1,   
+            gridColumnEnd: 5,
+            }}><p>Hall 1</p></div>
+           <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 3,
+            gridColumnStart: 5,   
+            gridColumnEnd: 8,
+            }}><p>Hall 2</p></div>
+            <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 3,
+            gridColumnStart: 8,   
+            gridColumnEnd: 12,
+            }}><p>Hall 3</p></div>
+            <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 5,
+            gridColumnStart: 12,   
+            gridColumnEnd: 14,
+            }}><p>Hall 4</p></div>
+            <div className="hall" style={{
+            gridRowStart: 3, 
+            gridRowEnd: 5,
+            gridColumnStart: 7,   
+            gridColumnEnd: 10,
+            }}><p>Hall 5</p></div>
+            <div className="hall" style={{
+            gridRowStart: 5, 
+            gridRowEnd: 7,
+            gridColumnStart: 1,   
+            gridColumnEnd: 4,
+            }}><p>Hall 6</p></div>
+            <div className="hall" style={{
+            gridRowStart: 3, 
+            gridRowEnd: 5,
+            gridColumnStart: 10,   
+            gridColumnEnd: 12,
+            }}><p>Hall 7</p></div>
+            <div className="hall" style={{
+            gridRowStart: 5, 
+            gridRowEnd: 7,
+            gridColumnStart: 8,   
+            gridColumnEnd: 11,
+            }}><p>Hall 8</p></div>
+            <div className="hall" style={{
+            gridRowStart: 5, 
+            gridRowEnd: 7,
+            gridColumnStart: 11,   
+            gridColumnEnd: 14,
+            }}><p>Hall 9</p></div>
+        </div>
+      } 
     >      
     </MainScreenBox>
     <MainScreenBox 
@@ -64,7 +182,48 @@ ReactDOM.render(
         HALLS<br/>On Floor 3
         </p> 
       }
-      contenMarginTop={120}
+      contenMarginTop={220}
+      content=
+      {
+        <div className="floor-box">
+          <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 7,
+            gridColumnStart: 1,   
+            gridColumnEnd: 5,
+            }}><p>Hall 1</p></div>
+           <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 5,
+            gridColumnStart: 7,   
+            gridColumnEnd: 10,
+            }}><p>Hall 2</p></div>
+            <div className="hall" style={{
+            gridRowStart: 1, 
+            gridRowEnd: 3,
+            gridColumnStart: 10,   
+            gridColumnEnd: 14,
+            }}><p>Hall 3</p></div>
+            <div className="hall" style={{
+            gridRowStart: 3, 
+            gridRowEnd: 5,
+            gridColumnStart: 10,   
+            gridColumnEnd: 12,
+            }}><p>Hall 4</p></div>
+            <div className="hall" style={{
+            gridRowStart: 3, 
+            gridRowEnd: 7,
+            gridColumnStart: 12,   
+            gridColumnEnd: 14,
+            }}><p>Hall 5</p></div>
+            <div className="hall" style={{
+            gridRowStart: 5, 
+            gridRowEnd: 7,
+            gridColumnStart: 8,   
+            gridColumnEnd: 12,
+            }}><p>Hall 6</p></div>            
+        </div>
+      }
     >      
     </MainScreenBox>
     <MainScreenBox 
@@ -76,6 +235,12 @@ ReactDOM.render(
         </p> 
       }
       contenMarginTop={120}
+      content=
+      {
+        <div className="about">
+          {about}
+        </div>
+      }
     >      
     </MainScreenBox>
     <MainScreenBox 
@@ -87,13 +252,17 @@ ReactDOM.render(
         </p> 
       }
       contenMarginTop={120}
+      content=
+      {
+        <img src={mapImage} width={675}/>
+      }
     >      
     </MainScreenBox>
     <LineLabels 
       labels="WELCOME,FLOOR 1,FLOOR 2,FLOOR 3,INFORMATION,MAP" 
       labelSize="36px" 
       pageCount={5} 
-      pageHeight={1280} 
+      pageHeight={1080} 
       pageAlign="right"
       labelAlign="center"
     />    

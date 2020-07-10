@@ -32,7 +32,7 @@
 
 .background-image
 {
-    height: 1280px !important;
+    height: 1080px !important;
     background-size: cover; 
     box-shadow: inset 0px 0px 250px 10px rgba(0, 0, 0, 1);
 }
@@ -40,15 +40,38 @@
 
 .floor-box
 {
-    width: 665px;
-    height: 265px;    
+    overflow: hidden;
 
-    background: #545454;
+    background: #FFFFFF;
     border: 5px solid #FFFFFF;
     box-sizing: border-box;
     box-shadow: 5px 5px 20px #000000;
-    border-radius: 15px;
+    border-radius: 15px;        
+
+    display: grid;  
+    grid-gap: 5px;    
+    grid-template: repeat(6,50px)/repeat(13,50px);
+    grid-auto-rows: 50px;
+    grid-auto-flow: dense;
 }
+
+.hall
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:#545454;
+    font-size: 32px;
+    line-height: 110px;
+}
+
+.about
+{
+    width: 475px;
+    font-size: 32px;
+    line-height: 45px;
+}
+
 
 @font-face 
 {
