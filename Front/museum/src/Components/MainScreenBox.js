@@ -12,7 +12,6 @@ const MainScreenBox = (props) => {
             </div>
         </div>);
 };
-// comments.find(item => item.id == UsersData.id).text
-{/* <Cell key={user.id} before={<Avatar src={user.photo_50}/>}>{user.last_name} {user.first_name}</Cell> */}
+
 
 export default MainScreenBox;
