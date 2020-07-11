@@ -3,6 +3,8 @@ import '../CSS/AdminPanel.css'
 
 import View from '../Components/View'
 import AdminNavBar from '../Components/AdminNavBar'
+import ExpositionPanel from '../Panels/ExpositionPanel'
+
 
 const AdminPanel = (props) => {    
 
@@ -24,9 +26,9 @@ const AdminPanel = (props) => {
                 <p id="LOG" onClick={()=>{setActivePanel("LOG")}}>LOG</p>
             </AdminNavBar>
             <View activePanel={activePanel}>
-                <div id="EXPOSITIONS" style={{backgroundColor:"red", width:"100px", height:"100px"}}></div>
-                <div id="EXHIBITS" style={{backgroundColor:"aqua", width:"100px", height:"100px"}}></div>
-                <div id="LOG" style={{backgroundColor:"blue", width:"100px", height:"100px"}}></div>
+                <ExpositionPanel id="EXPOSITIONS" style={{backgroundColor:"red", width:"100px", height:"100px"}}/>
+                <div id="EXHIBITS" style={{backgroundColor:"aqua", width:"100px", height:"100px"}}/>
+                <div id="LOG" style={{backgroundColor:"blue", width:"100px", height:"100px"}}/>
             </View>
         </div>);
 };

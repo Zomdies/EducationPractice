@@ -41,7 +41,7 @@ const LineLabels = ({labels, labelSize, labelAlign="left", lineHeight, lineWidth
                                         left: "50%",
                                         width:lineWidth, 
                                         height:lineHeight, 
-                                        top:parseInt(margin)+index*(lineHeight+parseInt(labelSize)+15), 
+                                        top:parseInt(margin)+index*(lineHeight+parseInt(labelSize)+17), 
                                         backgroundColor:{lineColor},
                                     }}>                
                                 </div>
