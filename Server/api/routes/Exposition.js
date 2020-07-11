@@ -3,6 +3,8 @@ const route = express.Router();
 const mongooes = require('mongoose');
 
 const dopFunction = require('../specialFunction');
+const LineLog = require('../models/LineLog');
+const Exhibit = require('../models/Exhibit');
 const Exposition = require('../models/Exposition')
 
 module.exports = (access_token) => {
@@ -11,7 +13,7 @@ module.exports = (access_token) => {
         const getOps = {};
         if (req.body["_id"])
             getOps["_id"] = req.body._id;
-        Exposition.find(getOps)
+        Exposition.find(getOps, null, { skip: req.body.skip, limit: req.body.limit })
             .then(result => {
                 res.status(200).json({
                     result: result
@@ -22,6 +24,31 @@ module.exports = (access_token) => {
                     error: err
                 });
             });
+    });
+
+    // GET Exhibit in Exposition // Need to get all Exhibit in Exposition
+    route.get('/:id', async (req, res, next) => {
+        const getOps = {};
+        if (req.body["_id"])
+            getOps["_id"] = req.body._id;
+        var result = [];
+        await LineLog.find({ ID_Exposition: req.params.id })
+            .then(async (items) => {
+                for (var i = 0; i < items.length; i++) {
+                    await Exhibit.find({ "_id": items[i].ID_Exhibit })
+                        .then(exp => {
+                            console.log(exp);
+                            result.push(exp);
+                        })
+                }
+            })
+            .catch(err => {
+                res.status(404).json({
+                    message: `Error exposition`,
+                    error: err
+                })
+            });
+        res.status(200).send(result);
     });
 
     // POST Exposition // Need to creater Exposition

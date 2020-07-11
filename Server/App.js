@@ -31,7 +31,7 @@ if (config.show_tokens_to_console) {
 
 
 app.use(cors());
-// app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 require('./api/routes/LoginRoutes')(app, access_token);

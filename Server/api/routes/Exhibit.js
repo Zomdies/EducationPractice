@@ -14,7 +14,7 @@ module.exports = (access_token) => {
         const getOps = {};
         if (req.body["_id"])
             getOps["_id"] = req.body._id;
-        Exhibit.find(getOps)
+            Exhibit.find(getOps, null,{skip : req.body.skip, limit : req.body.limit})
             .then(result => {
                 res.status(200).json({
                     result: result
