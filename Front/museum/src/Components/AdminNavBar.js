@@ -31,7 +31,7 @@ const AdminNavBar = (props) => {
 
     return(
         <div style={{...layoutStyle, marginTop:lineTopMargin}}>  
-            <div className='line' style={{...lineStyle, height:parseInt(labelTopMargin)-parseInt(lineTopMargin), top:"auto"}}/>
+            <div className='line-r' style={{...lineStyle, height:parseInt(labelTopMargin)-parseInt(lineTopMargin), top:"auto"}}/>
             {props.children !== null ? props.children.map((block,index) => {                
                 const _fontSize = block.props.id == activeLine ? (parseInt(lineSize) + parseInt(increasingIndex))+"px": lineSize;
                 return(
@@ -47,8 +47,8 @@ const AdminNavBar = (props) => {
                             {block}
                         </div>
                         {props.children[index+1] !==  undefined ? 
-                            <div className='line' style={{...lineStyle, height:lineGap, top:"auto"}}/>
-                            :<div className='line' style={{...lineStyle, height:"350px", top:"auto"}}/>}                        
+                            <div className='line-r' style={{...lineStyle, height:lineGap, top:"auto"}}/>
+                            :<div className='line-r' style={{...lineStyle, height:"350px", top:"auto"}}/>}                        
                     </>)
             }):null}
             <div 
