@@ -1,10 +1,33 @@
 const express = require('express');
 const route = express.Router();
 const mongooes = require('mongoose');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname)
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === "image/png" || file.mimetype === "image/jpeg") {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+}
 
 const dopFunction = require('../specialFunction');
 const Exhibit = require('../models/Exhibit');
+const { param } = require('../../App');
 
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter
+});
 
 
 module.exports = (access_token) => {
@@ -14,7 +37,7 @@ module.exports = (access_token) => {
         const getOps = {};
         if (req.body["_id"])
             getOps["_id"] = req.body._id;
-            Exhibit.find(getOps, null,{skip : req.body.skip, limit : req.body.limit})
+        Exhibit.find(getOps, null, { skip: req.body.skip, limit: req.body.limit })
             .then(result => {
                 res.status(200).json({
                     result: result
@@ -28,12 +51,12 @@ module.exports = (access_token) => {
     });
 
     // POST Exhibit // Need to creater Exhibit
-    route.post('/', (req, res, next) => {
+    route.post('/', upload.single('exhibitImage'), (req, res, next) => {
         if (dopFunction.CheckToken(req.body.token, access_token)) {
             var postOps = {};
             for (param in Exhibit.schema.paths) {
 
-                if (param !== '_id' && param !== '__v')
+                if (param !== '_id' && param !== '__v' && param !== 'Image')
                     if (req.body[param] !== undefined) {
                         postOps[param] = req.body[param];
                     } else {
@@ -43,6 +66,14 @@ module.exports = (access_token) => {
                         res.send();
                         break;
                     };
+            };
+            try {
+                postOps["Image"] = req.file.destination + req.file.filename;
+            } catch (err) {
+                res.status(500).json({
+                    message: "You didn't send all parametrs",
+                    error: err
+                })
             };
             postOps["_id"] = new mongooes.Types.ObjectId;
             const exhibit = new Exhibit(postOps);
@@ -67,14 +98,16 @@ module.exports = (access_token) => {
     });
 
     // PATH Exhibit // Need to update atribute in Exhibit
-    route.patch('/', (req, res, next) => {
+    route.patch('/', upload.single('exhibitImage'), (req, res, next) => {
         if (dopFunction.CheckToken(req.body.token, access_token)) {
             const updateOps = {};
-            for (param in req.body) {
-                if (param !== "_id")
+            for (var param in req.body) {
+                if (param !== "_id" && param !== "exhibitImage")
                     updateOps[param] = req.body[param];
             }
-            console.log(updateOps);
+            try {
+                updateOps["Image"] = req.file.destination + req.file.filename;
+            } catch{ };
             Exhibit.updateOne({ _id: req.body._id }, { $set: updateOps })
                 .exec()
                 .then(result => {

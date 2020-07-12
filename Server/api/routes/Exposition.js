@@ -1,6 +1,30 @@
 const express = require('express');
 const route = express.Router();
 const mongooes = require('mongoose');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname)
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === "image/png" || file.mimetype === "image/jpeg") {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+}
+
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter
+});
+
 
 const dopFunction = require('../specialFunction');
 const LineLog = require('../models/LineLog');
@@ -52,14 +76,15 @@ module.exports = (access_token) => {
     });
 
     // POST Exposition // Need to creater Exposition
-    route.post('/', (req, res, next) => {
+    route.post('/', upload.single("expositionImage"), (req, res, next) => {
         if (dopFunction.CheckToken(req.body.token, access_token)) {
             var postOps = {};
             for (param in Exposition.schema.paths) {
-                if (param !== '_id' && param !== '__v')
+                if (param !== '_id' && param !== '__v' && param !== "Image" && param != "Date_Create")
                     if (req.body[param] !== undefined) {
                         postOps[param] = req.body[param];
                     } else {
+                        console.log("1)")
                         res.status(500).json({
                             error: "You didn't send all parametrs"
                         });
@@ -67,7 +92,17 @@ module.exports = (access_token) => {
                         break;
                     };
             };
+            try {
+                postOps["Image"] = req.file.destination + req.file.filename;
+            } catch (err) {
+                res.status(500).json({
+                    message: "You didn't send all parametrs",
+                    error: err
+                })
+            };
             postOps["_id"] = new mongooes.Types.ObjectId;
+            postOps["Date_Create"] = new Date().toString();
+            console.log(postOps);
             const exposition = new Exposition(postOps);
             exposition.save()
                 .then(result => {
@@ -90,14 +125,16 @@ module.exports = (access_token) => {
     });
 
     // PATH Exposition // Need to update atribute in Exposition
-    route.patch('/', (req, res, next) => {
+    route.patch('/', upload.single("expositionImage"), (req, res, next) => {
         if (dopFunction.CheckToken(req.body.token, access_token)) {
             const updateOps = {};
             for (param in req.body) {
-                if (param !== "_id")
+                if (param !== "_id" && param !== "expositionImage")
                     updateOps[param] = req.body[param];
             }
-            console.log(updateOps);
+            try {
+                updateOps["Image"] = req.file.destination + req.file.filename;
+            } catch{ };
             Exposition.updateOne({ _id: req.body._id }, { $set: updateOps })
                 .exec()
                 .then(result => {
