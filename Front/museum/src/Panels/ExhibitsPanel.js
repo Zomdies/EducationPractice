@@ -11,12 +11,11 @@ const ExpositionPanel = (props) => {
   
     return(    
     <div className="flex center">
-        <CardContainer columnCount={2}>
-    
-            <div className="card light flex center" style={{fontSize:32}}><p>NEW</p></div>            
+        <CardContainer columnCount={2}>            
+            <div className="card light flex center" style={{fontSize:32}}><p>NEW</p></div>                        
             <Card 
                 image={expositionImage}
-                header={<p>This is Expostition</p>}
+                header={<p>This is Exhibit</p>}
                 icons={<><div style={{background:"#ff3", width:24, height:24}}/><div style={{background:"#a2b", width:24, height:24}}/><div style={{background:"#ff3", width:24, height:24}}/></>} 
                 content={"Волк слабее льва и тигра, но в цирке волк не выступает"}
             />

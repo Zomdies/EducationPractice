@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../CSS/LineLabels.css'
 
 const LineLabels = ({labels, labelSize, labelAlign="left", lineHeight, lineWidth="5px", lineColor = "#FFFFFF", pageCount, pageHeight, pageAlign, pageMargin="100px"}) => {
-    
+       
     const margin="75px"
-    console.log(lineHeight)
     
     labels = labels != null ? labels.split(',') : null;
-    lineHeight = lineHeight == null ? pageHeight-(parseInt(labelSize)+15) : lineHeight;
-    console.log(lineHeight)
+    lineHeight = lineHeight == null ? pageHeight-(parseInt(labelSize)+15) : lineHeight
    
     const mainstyle = 
     {

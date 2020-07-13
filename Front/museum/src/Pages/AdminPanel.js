@@ -3,8 +3,10 @@ import '../CSS/AdminPanel.css'
 
 import View from '../Components/View'
 import AdminNavBar from '../Components/AdminNavBar'
-import ExpositionPanel from '../Panels/ExpositionPanel'
 
+import ExpositionPanel from '../Panels/ExpositionPanel'
+import ExhibitsPanel from '../Panels/ExhibitsPanel'
+import LineLogPanel from '../Panels/LineLogPanel'
 
 const AdminPanel = (props) => {    
 
@@ -27,8 +29,8 @@ const AdminPanel = (props) => {
             </AdminNavBar>
             <View activePanel={activePanel}>
                 <ExpositionPanel id="EXPOSITIONS" style={{backgroundColor:"red", width:"100px", height:"100px"}}/>
-                <div id="EXHIBITS" style={{backgroundColor:"aqua", width:"100px", height:"100px"}}/>
-                <div id="LOG" style={{backgroundColor:"blue", width:"100px", height:"100px"}}/>
+                <ExhibitsPanel id="EXHIBITS" style={{backgroundColor:"aqua", width:"100px", height:"100px"}}/>
+                <LineLogPanel id="LOG" style={{backgroundColor:"blue", width:"100px", height:"100px"}}/>
             </View>
         </div>);
 };
