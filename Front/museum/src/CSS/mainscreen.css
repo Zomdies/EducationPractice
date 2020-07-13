@@ -79,7 +79,7 @@
     src: url(../Font/static/Oswald-Regular.ttf); 
 }
 
-body{    
+body{ 
     --color-dark: #545454;
     --color-light: #767575;
     --color-wihte: #FFFFFF;

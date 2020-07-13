@@ -1,25 +1,27 @@
 import React from 'react';
+
+
+import MainScreen from './Pages/MainScreen'
+import AdminPanel from './Pages/AdminPanel'
+import { Router, Switch, Redirect, Route } from 'react-router'
+import { createBrowserHistory } from 'history'
+
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const history = createBrowserHistory()
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className=""
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.StrictMode >
+      <Router history={history}>
+        <Switch>
+          <Route history={history} path='/home' component={MainScreen} />
+          <Route history={history} path='/admin' component={AdminPanel} />
+          <Redirect from='/' to='/home' />
+        </Switch>
+      </Router>
+    </React.StrictMode>
   );
 }
 
