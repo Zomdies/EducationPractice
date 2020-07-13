@@ -1,0 +1,96 @@
+.MainPanel-Body {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.MainPanel-ErrorMessage{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.MainPanel-HeaderText {
+    /* display: block; */
+    margin-top: 18%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 71px;
+}
+
+.MainPanel-FormInput {
+    display: block;
+    width: 40%;
+    min-width: 400px;
+    min-height: 319px;
+    margin: 0 auto;
+    /* padding-left: 25%; */
+    /* padding-right: 25%; */
+    background: #767575;
+    border-radius: 25px;
+}
+
+.MainPanel-FormInput-Text {
+    padding-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 44px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    text-shadow: 0px 0px 60px rgba(0, 0, 0, 0.8);
+}
+
+.MainPanel-FormInput-Input {
+    outline: none;
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    width: -webkit-fill-available;
+    font-size: 25px;
+    color: white;
+    margin-left: 25px;
+    margin-right: 25px;
+    background: #767575;
+    border-radius: 11px;
+    border: 3.4px solid white;
+}
+
+.MainPanel-FormInput-Button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 25px;
+    height: 54px;
+    width: -webkit-fill-available;
+    font-size: 25px;
+    color: white;
+    font-family: Oswald;
+    margin-left: 25px;
+    margin-right: 25px;
+    border-radius: 15px;
+    background: #545454;
+    border: 3.4px solid #545454;
+    box-shadow: 0px 0px 5px #000000;
+    border-radius: 15px;
+    outline: none;
+}
+
+.MainPanel-FormInput-Button:hover {
+    background: #414141;
+    border: 3.4px solid #414141;
+}
+
+/* .MainPanel-FormInput-Button:active, .MainPanel-FormInput-Button:focus {
+    outline: none;
+} */
+
+.MainPanel-FormInput-Button:-moz-focus-inner {
+    border: 0;
+}

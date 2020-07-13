@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+
+
 import '../CSS/AdminPanel.css'
 
 import View from '../Components/View'
@@ -12,6 +14,10 @@ const AdminPanel = (props) => {
 
     const[activePanel,setActivePanel] = useState("EXPOSITIONS"); 
 
+    useEffect(()=>{
+        // console.log(props)
+        // console.log(history);
+    },[])
     return(
         <div className="Layout">
             <AdminNavBar 
