@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const config = require('./config/db_const');
 
@@ -18,7 +18,6 @@ const expositionRoutes = require('./api/routes/Exposition');
 const lineLogRoutes = require('./api/routes/LineLog');
 const userRoutes = require('./api/routes/User');
 const anyRoutes = require('./api/routes/AnyRoutes');
-const { db } = require('./api/models/Hall');
 
 
 var access_token = {};
