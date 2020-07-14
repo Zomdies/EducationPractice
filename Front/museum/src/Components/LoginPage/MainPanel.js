@@ -3,17 +3,11 @@ import * as cryptoJS from 'crypto-js'
 
 import './css/MainPanel.css'
 import { server_url } from '../../config'
-// import { Redirect } from 'react-router-dom';
 import { useHistory, Redirect } from 'react-router-dom';
 
 
 export default function MainPanel(props) {
-
-    // useEffect(()=>{
-    //     console.log(props.history);
-
-    // },[]);
-
+ 
     const [a, setA] = useState(null);
     const [textMessage, setTextMessage] = useState(null);
 

@@ -9,17 +9,32 @@ import AdminNavBar from '../Components/AdminNavBar'
 import ExpositionPanel from '../Panels/ExpositionPanel'
 import ExhibitsPanel from '../Panels/ExhibitsPanel'
 import LineLogPanel from '../Panels/LineLogPanel'
+import PopOut from '../Components/PopOut/PopOut';
 
 const AdminPanel = (props) => {    
 
-    const[activePanel,setActivePanel] = useState("EXPOSITIONS"); 
+    const[activePanel,setActivePanel] = useState("EXPOSITIONS");    
 
-    useEffect(()=>{
-        // console.log(props)
-        // console.log(history);
-    },[])
+    const[activePopOut, setActivePopOut] = useState("is");      
+    
+    const eas = () =>
+    {
+        console.log("as")
+        setActivePopOut(null)
+        console.log(activePopOut)
+    }
+
+    //почему-то onClick  срабатывает сразу же либо клик по контейнеру проходит дальше и срабатывает установка
     return(
-        <div className="Layout">
+        <div className="Layout" onClick={()=>{console.log("!!",setActivePopOut("iass"))}}>
+            <PopOut activePopOut={activePopOut} setActivePopOut={(a)=>{eas(a)}}>
+                <p id="is">
+                    Земля плоская   
+                </p>
+                <p id="iass">
+                    Колобок повесился   
+                </p>
+            </PopOut>
             <AdminNavBar 
                 id="navbar"                 
                 style={{backgroundColor:"black", width:"100px", height:"100px"}}

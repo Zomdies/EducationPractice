@@ -18,7 +18,7 @@
 .card.layout
 {
     display: grid;
-    grid-template-columns: 140px 250px 85px;
+    grid-template-columns: 130px 250px 95px;
     grid-template-rows: 30px 90px 30px;
     grid-template-areas:    "image header header"
                             "image content icons"
