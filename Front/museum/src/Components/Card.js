@@ -12,7 +12,6 @@ const Card = (props) => {
     const {content} = props;
     const {contentStyle} = props;
     
-    console.log(image)
 
     return(
             <div className="card layout">

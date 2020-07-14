@@ -1,0 +1,35 @@
+.editor-layout
+{
+    display: grid;
+    grid-template-columns: 415px 485px;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas:".  icons"
+                        "image  content";
+
+    width: 900px;
+    height: 450px; 
+    
+    background: #545454;
+    border-radius: 20px;
+}
+
+.icons-container
+{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    align-items: center;
+}
+
+.exp-image
+{
+    width: 380px;
+    height: 380px;
+}
+
+.flex-center
+{
+    justify-content: center;
+    align-items: flex-start;
+    display: flex;        
+}
