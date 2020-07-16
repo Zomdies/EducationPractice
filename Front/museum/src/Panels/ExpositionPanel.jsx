@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/AdminPanel.css'
-import '../CSS/Cards.css'
+// import '../Css/AdminPage.css'
+// import '../Css/Component/Cards.css'
 
-import CardContainer from '../Components/CardContainer'
-import Card from '../Components/Card'
-import ExpositionEditor from '../Components/ExpositionEditor/ExpositionEditor'
+import {Card, CardContainer, ExpositionEditor} from '../Components'
+
+
 
 import expositionImage from '../Image/Exposition.jpg'
 

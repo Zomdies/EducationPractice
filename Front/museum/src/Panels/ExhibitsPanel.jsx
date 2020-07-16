@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/AdminPanel.css'
-import '../CSS/Cards.css'
+// import '../Css/AdminPage.css'
+// import '../Css/Cards.css'
 
-import CardContainer from '../Components/CardContainer'
-import Card from '../Components/Card'
+import {Card, CardContainer} from '../Components'
 
 import expositionImage from '../Image/Exposition.jpg'
 

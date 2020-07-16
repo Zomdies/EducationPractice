@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/mainscreen.css'
 
 const MainScreenBox = (props) => {    
     return(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/AdminPanel.css'
+// import '../Css/AdminPage.css'
 
 
 const AdminNavBar = (props) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/AdminPanel.css'
-import '../CSS/Cards.css'
+// import '../Css/AdminPage.css'
+// import '../Css/Cards.css'
 
 const CardContainer = (props) => {   
     const columnCount = props.columnCount === null ? 1 :props.columnCount;    

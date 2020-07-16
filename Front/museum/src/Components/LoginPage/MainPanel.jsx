@@ -3,12 +3,12 @@ import * as cryptoJS from 'crypto-js'
 
 import './css/MainPanel.css'
 import { server_url } from '../../config'
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory, } from 'react-router-dom';
 
 
 export default function MainPanel(props) {
  
-    const [a, setA] = useState(null);
+    let history = useHistory();
     const [textMessage, setTextMessage] = useState(null);
 
     const Message = () => {
@@ -20,7 +20,7 @@ export default function MainPanel(props) {
             </div>
         )
     }
-    
+    //props.setAdminToken(result.token);
     const sendRequest = () => {
         fetch(`${server_url}/login`, {
             method: 'post',
@@ -37,7 +37,10 @@ export default function MainPanel(props) {
                 var d = null;
                 switch (res.status) {
                     case 200:
-                        res.json().then(result => { props.setAdminToken(result.token); setA(1); })
+                        res.json().then(result => { 
+                            document.cookie = "token="+result.token;
+                            // localStorage.setItem('token', result.token)
+                            history.push('/admin') })
                         break;
                     case 404:
                         setTextMessage("ERROR Login uncorrect");
@@ -47,10 +50,6 @@ export default function MainPanel(props) {
                         break;
                 }
             });
-    }
-    const foo = () => {
-        setA(null);
-        return (<Redirect to="/admin"></Redirect>)
     }
     return (
         <>
@@ -67,9 +66,6 @@ export default function MainPanel(props) {
                     <button className="MainPanel-FormInput-Button" onClick={sendRequest}>LOG IN</button>
                 </div>
             </div>
-            {a &&
-                (<Redirect to="/admin"></Redirect>)
-            }
         </>
     )
 }

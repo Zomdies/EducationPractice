@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/AdminPanel.css'
-import '../CSS/Cards.css'
+// import '../Css/AdminPage.css'
+import '../../Css/Components/Cards.css'
 
 const Card = (props) => {   
     const {image} = props;

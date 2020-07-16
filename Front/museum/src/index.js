@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+
+import { BrowserRouter as Router,Redirect  } from 'react-router-dom'
+
 import './index.css';
-import * as serviceWorker from './serviceWorker';
 
 import App from './App'
 
 
+
+
 ReactDOM.render(
-  <App ></App>,
+  <Router>
+    <App ></App>
+  </Router>,
   document.getElementById('root')
 );
 
-serviceWorker.unregister();

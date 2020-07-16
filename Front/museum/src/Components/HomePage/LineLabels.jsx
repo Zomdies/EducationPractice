@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/LineLabels.css'
+import '../../Css/Components/LineLabels.css'
 
 const LineLabels = ({labels, labelSize, labelAlign="left", lineHeight, lineWidth="5px", lineColor = "#FFFFFF", pageCount, pageHeight, pageAlign, pageMargin="100px"}) => {
        

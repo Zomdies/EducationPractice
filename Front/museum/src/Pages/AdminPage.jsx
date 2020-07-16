@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+import {View, AdminNavBar, LineLabels} from '../Components'
+import {ExpositionPanel, ExhibitsPanel, LineLogPanel} from "../Panels"
 
-import '../CSS/AdminPanel.css'
-
-import View from '../Components/View'
-import AdminNavBar from '../Components/AdminNavBar'
-
-import ExpositionPanel from '../Panels/ExpositionPanel'
-import ExhibitsPanel from '../Panels/ExhibitsPanel'
-import LineLogPanel from '../Panels/LineLogPanel'
+import '../Css/Pages/AdminPage.css'
 import '../Components/PopOut/css/PopOut.css'
 
 const AdminPanel = (props) => {    
