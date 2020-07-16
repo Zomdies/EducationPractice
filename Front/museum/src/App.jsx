@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 
 
-import { HomePage, AdminPage, LoginPage } from './Pages'
+import { HomePage, AdminPage, LoginPage, PreviewPage} from './Pages'
 
 import { token, server_url } from './config';
 
@@ -55,12 +55,15 @@ const App = () => {
       <Route path='/home'>
         <HomePage />
       </Route>
+      <Route exact path='/preview'>
+        <PreviewPage/>
+      </Route>
       <Route exact path='/admin' >
         <AdminPage adminToken={adminToken} />
       </Route>
       <Route exact path='/login'>
         <LoginPage setAdminToken={setAdminToken} />
-      </Route>
+      </Route>      
       <Redirect from='/' to='/home' />
     </Switch>
   );

@@ -1,0 +1,28 @@
+#bg
+{
+    height: 100vh !important;
+    background-size: cover;
+    filter: blur(30);
+}
+
+#expPreview
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#expPreview > img
+{
+    width: 650px;
+    height: 650px;  
+}
+
+#arrows
+{
+    display: flex;
+    align-items: center;
+    font-size: 35px;
+}

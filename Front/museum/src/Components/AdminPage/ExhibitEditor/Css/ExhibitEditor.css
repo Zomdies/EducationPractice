@@ -1,0 +1,30 @@
+
+select
+{
+    font-family: Oswald;
+}
+
+option
+{
+    color: rgb(77, 77, 77);
+}
+
+#discription
+{
+    background-color: transparent;
+    resize: none;
+    border: 3px solid white;
+    border-radius: 15px;
+    width: -webkit-fill-available;
+    height: 120px;
+    padding: 10px;
+    font-family: Oswald;
+    font-size: 18px;
+    color: white;
+    overflow-y: scroll;
+}
+
+#discription::-webkit-scrollbar 
+{
+    width: 0px;    
+}

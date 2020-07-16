@@ -1,0 +1,128 @@
+.list-container
+{
+    width: 480px;
+
+    padding: 10px;
+
+    background: #545454;
+    box-shadow: 0px 0px 39px rgba(0, 0, 0, 0.25);
+    border-radius: 17px;
+}
+
+#top-line
+{
+    font-size: 24px;
+}
+
+#search
+{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 6.5px;
+}
+
+
+
+#search > #icon
+{
+    margin-left: 3px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+
+#search > input
+{
+    padding: 0px;
+    background-color: transparent;
+    display: block;
+    width: -webkit-fill-available;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-family: Oswald;
+    color:#757575;
+}
+
+.exhibts-container
+{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    overflow-y: scroll;
+    height: 550px;
+    padding-right: 15px;
+}
+
+.exhibts-container::-webkit-scrollbar 
+{
+    width: 10px;    
+}
+  
+.exhibts-container::-webkit-scrollbar-track 
+{
+    background: transparent;
+}
+  
+.exhibts-container::-webkit-scrollbar-thumb 
+{
+    border-radius: 5px;
+    background: white;
+}
+  
+.exhibts-container::-webkit-scrollbar-thumb:hover 
+{
+    background: #d4d4d4;
+}
+
+.check-card
+{
+    margin-bottom: 15px;    
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 100px 1fr 30px;
+    grid-template-rows: 100px;
+    grid-template-areas: "image content checkbox";
+
+    justify-items: center;
+    align-items: center;
+
+    border-radius: 5.5px;
+    box-sizing: border-box;
+    border: 3px solid white;
+}
+
+.check-card > img
+{
+    grid-area: image;
+    width: 70px;
+    height: 70px;
+    border-radius: 3px;
+}
+
+.check-card > p
+{
+    margin-top: 10px;
+    justify-self: start;
+    align-self: start;
+    font-size: 18px;
+    text-decoration:underline;
+}
+.check-card > input
+{
+    grid-area: checkbox;
+}
+
+.y-center
+{
+    align-items: center;
+}
+
+
+
+

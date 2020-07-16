@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 // import '../Css/AdminPage.css'
 // import '../Css/Cards.css'
 
-import {Card, CardContainer} from '../Components'
+import {Card, CardContainer,ExhibitEditor,Warning} from '../Components'
 
 import expositionImage from '../Image/Exposition.jpg'
 
 
-import AddCircleOutline from '../Icons/add_circle_outline'
 import DeletOutline from '../Icons/delete_ouline'
 import EditOutline from '../Icons/edit_outline'
 
-const ExpositionPanel = (props) => {   
+const ExhibitsPanel = (props) => {   
+
+    const {setActivePopOut} = props
+
+    const warningMessage="You want to delete exhibit from exposition. Are you sure ?"
   
     return(    
     <div className="flex center">
@@ -21,9 +24,8 @@ const ExpositionPanel = (props) => {
                 image={expositionImage}
                 header={<p>This is Exhibit</p>}
                 icons={<>
-                    <DeletOutline/>
-                    <AddCircleOutline/>
-                    <EditOutline/>
+                    <DeletOutline onClick={()=>{setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut}/>)}}/>
+                    <EditOutline onClick={()=>{setActivePopOut(<ExhibitEditor setActivePopOut={setActivePopOut}/>)}}/>
                 </>} 
                 content={"Волк слабее льва и тигра, но в цирке волк не выступает"}
             />
@@ -43,10 +45,6 @@ const ExpositionPanel = (props) => {
     </div>);
 };
 
-export default ExpositionPanel;
+export default ExhibitsPanel;
 
 
-const linmap = (x,a,b,c,d)=>
-{
-    return c + (x-a) * (d-c) / (b-a)
-}

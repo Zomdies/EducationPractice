@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {View, AdminNavBar, LineLabels} from '../Components'
+import {View, NavBar, LineLabels} from '../Components'
 import {ExpositionPanel, ExhibitsPanel, LineLogPanel} from "../Panels"
 
 import '../Css/Pages/AdminPage.css'
@@ -23,7 +23,7 @@ const AdminPanel = (props) => {
                 </div>
                 :null
             }           
-            <AdminNavBar 
+            <NavBar 
                 id="navbar"                 
                 style={{backgroundColor:"black", width:"100px", height:"100px"}}
                 linePosition="left"
@@ -34,11 +34,11 @@ const AdminPanel = (props) => {
                 <p id="EXPOSITIONS" onClick={()=>{setActivePanel("EXPOSITIONS")}}>EXPOSITIONS</p>
                 <p id="EXHIBITS" onClick={()=>{setActivePanel("EXHIBITS")}}>EXHIBITS</p>
                 <p id="LOG" onClick={()=>{setActivePanel("LOG")}}>LOG</p>
-            </AdminNavBar>
+            </NavBar>
             <View activePanel={activePanel}>
                 <ExpositionPanel id="EXPOSITIONS" setActivePopOut={setActivePopOut}/>
-                <ExhibitsPanel id="EXHIBITS" style={{backgroundColor:"aqua", width:"100px", height:"100px"}}/>
-                <LineLogPanel id="LOG" style={{backgroundColor:"blue", width:"100px", height:"100px"}}/>
+                <ExhibitsPanel id="EXHIBITS" setActivePopOut={setActivePopOut}/>
+                <LineLogPanel id="LOG" setActivePopOut={setActivePopOut}/>
             </View>
         </div>);
 };

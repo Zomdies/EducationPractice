@@ -1,6 +1,5 @@
 .card
 {
-    margin: auto;
     height: 150px;
     width: 475px;
     background: #545454;
@@ -37,7 +36,8 @@
     display: grid;
     grid-gap: 20px;    
     grid-template-columns: 1fr  1fr;
-    grid-template-rows: auto;  
+    grid-template-rows: min-content;  
+    grid-auto-rows:min-content;
     background-color: #767575;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }

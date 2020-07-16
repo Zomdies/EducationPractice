@@ -1,0 +1,28 @@
+.side-bar
+{
+    width:300px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 100vh;
+}
+
+.side-bar > *
+{
+    width: 100%;
+    text-align: center;
+}
+
+.bar-line
+{
+    border-radius: 5px;
+    width: 5px;
+    background-color: white;
+}
+
+.bar-line.grow
+{
+    flex-grow: 0.95
+}

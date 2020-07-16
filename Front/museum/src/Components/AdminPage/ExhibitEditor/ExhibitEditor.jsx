@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
 
-import './ExpositionEditor.css'
+import './Css/ExhibitEditor.css'
 
-import { server_url } from '../../../config'
 
 import DismissOutline from '../../../Icons/dismiss_substract'
 import DoneOutline from '../../../Icons/done_substract'
 import defImage from '../../../Image/nophoto.png'
 
-const ExpositionEditor = (props) => {
-    const { exposition } = props
+const ExhibitEditor = (props) => {
+    const { exhibit } = props
     const { setActivePopOut } = props
 
-    const imgSource = exposition !== undefined ? server_url + exposition.Image : null;
-    const [expImage, setExpImage] = useState(imgSource)
+    const imgSource = exhibit !== undefined ? null + exhibit.Image : null;
+    const [exhImage, setExhImage] = useState(imgSource)
 
     useEffect(() => {
+        daragAndDropInit()
+    }, [])
+
+    const log = () => {
+        console.log("Загружено");
+        const inp = document.getElementById("file-input")
+        const nameInp = document.getElementById("nameInput")
+        nameInp.value = inp.files[0].name.slice(0, -4)
+        setExhImage(URL.createObjectURL(inp.files[0]))
+    }
+
+    const daragAndDropInit = () => {
         const inp = document.getElementById("file-input")
         const dropZone = document.getElementById("upload-container")
         dropZone.ondrag = ((e) => { e.preventDefault(); e.stopPropagation() })
@@ -24,7 +35,7 @@ const ExpositionEditor = (props) => {
         dropZone.ondrop = ((e) => {
             e.preventDefault();
             dropZone.classList.remove("dragover");
-            setExpImage(URL.createObjectURL(e.dataTransfer.files[0]))
+            setExhImage(URL.createObjectURL(e.dataTransfer.files[0]))
             const nameInp = document.getElementById("nameInput")
             nameInp.value = e.dataTransfer.files[0].name.slice(0, -4)
         })
@@ -47,21 +58,12 @@ const ExpositionEditor = (props) => {
                 dropZone.classList.remove("dragover")
             };
         })
-
-    }, [])
-
-    const log = () => {
-        console.log("Загружено");
-        const inp = document.getElementById("file-input")
-        const nameInp = document.getElementById("nameInput")
-        nameInp.value = inp.files[0].name.slice(0, -4)    
-        setExpImage(URL.createObjectURL(inp.files[0]))
     }
 
     return (
         <div className="editor-layout">
             <div className="flex-center" style={{ gridArea: "image" }}>
-                {expImage === null ?
+                {exhImage === null ?
                     <div className="safq" id="upload-container">
                         <img id="upload-image" src="https://habrastorage.org/webt/dr/qg/cs/drqgcsoh1mosho2swyk3kk_mtwi.png" />
                         <div>
@@ -70,7 +72,7 @@ const ExpositionEditor = (props) => {
                             <span> или перетащите его сюда</span>
                         </div>
                     </div> :
-                    <img id="sd" className="exp-image" src={expImage} />
+                    <img id="sd" className="exp-image" src={exhImage} />
                 }
             </div>
             <div className="icons-container" style={{ gridArea: "icons" }}>
@@ -79,20 +81,21 @@ const ExpositionEditor = (props) => {
             </div>
             <div style={{ gridArea: "content", paddingRight: 15 }}>
                 <span className="input-label">NAME</span>
-                <input id="nameInput" className="input-outline" type="text" value={exposition != undefined ? exposition.Name : null} />
-                <div className="flex-row">
-                    <div>
-                        <span className="input-label">OPEN DATE</span>
-                        <input className="input-outline" type="date" value={exposition != undefined ? exposition.Name : null} />
-                    </div>
-                    <div>
-                        <span className="input-label">CLOSE DATE</span>
-                        <input className="input-outline" type="date" value={exposition != undefined ? exposition.Name : null} />
-                    </div>
-                </div>
-            </div>
-        </div>
+                <input id="nameInput" className="input-outline" type="text" value={exhibit != undefined ? exhibit.Name : null} />
+                <span className="input-label">STATUS</span>
+                <select id="selectStatus" className="input-outline">
+                    <option value="1">Is used</option>
+                    <option value="2">Transported</option>
+                    <option value="3">Not use</option>
+                </select >
+                <span className="input-label">DISCRIPTION</span>
+                <textarea id="discription">
+
+                </textarea>
+            </div >
+        </div >
     );
 };
 
-export default ExpositionEditor;
+export default ExhibitEditor;
+

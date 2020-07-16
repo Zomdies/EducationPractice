@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import '../Css/AdminPage.css'
 import '../../Css/Components/Cards.css'
 
 const Card = (props) => {   

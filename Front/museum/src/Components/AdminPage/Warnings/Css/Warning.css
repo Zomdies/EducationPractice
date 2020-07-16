@@ -1,0 +1,38 @@
+.warning-container
+{
+    width: 380px;
+    background: #545454;
+    border-radius: 10px;
+    box-shadow: 0px 0px 39px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+}
+.warning-name
+{
+    font-size: 28px;
+}
+.message
+{
+    font-size: 20px;
+    
+}
+.buttons-container
+{
+    display: flex;
+    justify-content: flex-end;    
+}
+
+.buttons-container > div
+{
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 24px;
+}
+
+.buttons-container > #accept:hover
+{
+    color: rgb(233, 255, 199);
+}
+.buttons-container > #cancel:hover
+{
+    color: #ffcaca;
+}

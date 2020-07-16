@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import '../Css/AdminPage.css'
 // import '../Css/Component/Cards.css'
 
-import {Card, CardContainer, ExpositionEditor} from '../Components'
+import {Card, CardContainer, ExpositionEditor,ExhibitsAddList, Warning} from '../Components'
 
 
 
@@ -16,6 +16,7 @@ import EditOutline from '../Icons/edit_outline'
 const ExpositionPanel = (props) => {   
     
     const {setActivePopOut}=props
+    const warningMessage="You want delete exposition. Are you sure ?"
 
     return(    
     <div className="flex center">
@@ -24,9 +25,9 @@ const ExpositionPanel = (props) => {
             <Card 
                 image={expositionImage}
                 header={<p>This is Expostition</p>}
-                icons={<>
-                        <DeletOutline/>
-                        <AddCircleOutline onClick={()=>{console.log("SSADF")}}/>
+                icons={<>                
+                        <DeletOutline onClick={()=>{setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut}/>)}}/>
+                        <AddCircleOutline onClick={()=>{setActivePopOut(<ExhibitsAddList setActivePopOut={setActivePopOut}/>)}}/>
                         <EditOutline onClick={()=>{setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut}/>)}}/>
                     </>} 
                 content={"Волк слабее льва и тигра, но в цирке волк не выступает"}
