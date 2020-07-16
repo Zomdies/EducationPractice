@@ -12,14 +12,14 @@ module.exports = (access_token) =>{
 
     route.post('/tokenLive', (req,res,next)=>{
         let check = Object.values(access_token).indexOf(req.body.token,0);
-        console.log(check);
-        if (check !== 1){
-            res.status(500).json({
-                message : "Token is active",
-            })
-        }else{
+        // console.log(check);
+        if (check === -1){
             res.status(404).json({
                 message : "Error token not found",
+            })
+        }else{
+            res.status(200).json({
+                message : "Token is active",
             })
         }
     });

@@ -20,7 +20,7 @@ module.exports = (app, access_token) =>{
                 access_token[postOps.Login] = token;
                 setTimeout(()=>{
                     delete access_token[postOps.Login]
-                },autoLogout*1000);
+                },autoLogout*1000*60);
                 res.status(200).json({
                     message : `User ${postOps.Login} was logged`,
                     token : token
