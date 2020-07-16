@@ -1,12 +1,11 @@
 .editor-layout
 {
     display: grid;
-    grid-template-columns: 415px 485px;
+    grid-template-columns: 415px 550px;
     grid-template-rows: 50px 1fr;
     grid-template-areas:".  icons"
                         "image  content";
 
-    width: 900px;
     height: 450px; 
     
     background: #545454;
@@ -25,6 +24,7 @@
 {
     width: 380px;
     height: 380px;
+    border-radius: 10px;
 }
 
 .flex-center
@@ -32,4 +32,87 @@
     justify-content: center;
     align-items: flex-start;
     display: flex;        
+}
+
+#upload-container {
+    border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 380px;
+	height: 380px;	
+	background-color: #ffffff;
+	color: #000000;
+}
+
+#upload-container img {
+	width: 40%;
+	margin-bottom: 20px;
+	user-select: none;
+}
+#upload-container label {
+	font-weight: bold;
+}
+
+#upload-container label:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+#upload-container div {
+	position: relative;
+	z-index: 10;
+}
+
+#upload-container input[type=file] {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	position: absolute;
+	z-index: -10;
+}
+
+#upload-container label.focus {
+	outline: 1px solid #0078d7;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+#upload-container.dragover {
+    background-color: #e2e2e2;
+    box-shadow: inset 0px 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.input-label {
+    padding-left: 5px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 44px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    text-shadow: 0px 0px 60px rgba(0, 0, 0, 0.8);
+}
+
+.input-outline
+{
+    outline: none;
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    width: -webkit-fill-available;
+    font-size: 25px;
+    color: white;
+    background: transparent;
+    border-radius: 11px;
+    border: 3.4px solid white;
+}
+
+
+.flex-row
+{
+    display: flex;
+    justify-content: space-between;        
 }

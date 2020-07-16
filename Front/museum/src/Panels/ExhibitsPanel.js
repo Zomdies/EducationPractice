@@ -7,6 +7,11 @@ import Card from '../Components/Card'
 
 import expositionImage from '../Image/Exposition.jpg'
 
+
+import AddCircleOutline from '../Icons/add_circle_outline'
+import DeletOutline from '../Icons/delete_ouline'
+import EditOutline from '../Icons/edit_outline'
+
 const ExpositionPanel = (props) => {   
   
     return(    
@@ -16,7 +21,11 @@ const ExpositionPanel = (props) => {
             <Card 
                 image={expositionImage}
                 header={<p>This is Exhibit</p>}
-                icons={<><div style={{background:"#ff3", width:24, height:24}}/><div style={{background:"#a2b", width:24, height:24}}/><div style={{background:"#ff3", width:24, height:24}}/></>} 
+                icons={<>
+                    <DeletOutline/>
+                    <AddCircleOutline/>
+                    <EditOutline/>
+                </>} 
                 content={"Волк слабее льва и тигра, но в цирке волк не выступает"}
             />
             <Card image={expositionImage}/>

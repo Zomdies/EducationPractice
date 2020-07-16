@@ -17,8 +17,6 @@ const ExpositionPanel = (props) => {
     
     const {setActivePopOut}=props
 
-    console.log(props)
-
     return(    
     <div className="flex center">
         <CardContainer columnCount={2}>    

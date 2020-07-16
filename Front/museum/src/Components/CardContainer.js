@@ -5,8 +5,6 @@ import '../CSS/Cards.css'
 const CardContainer = (props) => {   
     const columnCount = props.columnCount === null ? 1 :props.columnCount;    
 
-    console.log(props)
-
     let columnTemplate="";
     for(let i=0;i<columnCount;i++)
         columnTemplate+="1fr "
