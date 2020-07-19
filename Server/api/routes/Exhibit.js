@@ -22,7 +22,7 @@ const fileFilter = (req, file, cb) => {
 
 const dopFunction = require('../specialFunction');
 const Exhibit = require('../models/Exhibit');
-const { param } = require('../../App');
+const LineLog = require('../models/LineLog')
 
 const upload = multer({
     storage: storage,
@@ -50,13 +50,54 @@ module.exports = (access_token) => {
             });
     });
 
+    // GET EXHIBIT/:id // Need to get Exhibi, which we can put in Exposition
+    route.get('/:id', (req, res, next) => {
+        Exhibit.find({})
+            .then(exhibits => {
+                let a = [];
+                // || exhibit.Exposition.ID_Exposition == req.params.id
+                exhibits.map(exhibit => {
+                    if (exhibit.Exposition.ID_Exposition === null) {
+                        a.push(exhibit)
+                    }
+                })
+                res.send(a);
+            })
+            .catch(err => console.log(err));
+    });
+
+    // POST Exhibit/AddInExposition  //Need to add Exposition to Exhibit
+
+    route.post('/AddInExposition', (req, res, next) => {
+
+        try {
+            req.body.put.map(id => {
+                let updateOps = {
+                    Exposition: {
+                        ID_Exposition: req.body.ID_Exposition,
+                        Date_Note: Date.now()
+                    }
+                }
+                Exhibit.findOneAndUpdate({ _id: id }, { $set : updateOps}, (err, doc) => {
+                    if (err) { res.send(err); }
+                    res.send(doc);
+                })
+            })
+
+        } catch (err) { res.send("Error Server") }
+        // if (typeof req.body.put)
+
+
+    });
+
+
     // POST Exhibit // Need to creater Exhibit
     route.post('/', upload.single('exhibitImage'), (req, res, next) => {
         if (dopFunction.CheckToken(req.body.token, access_token)) {
             var postOps = {};
-            for (param in Exhibit.schema.paths) {
+            for (var param in Exhibit.schema.paths) {
 
-                if (param !== '_id' && param !== '__v' && param !== 'Image')
+                if (param !== '_id' && param !== '__v' && param !== 'Image' && param !== 'Exposition.Date_Note' && param !== 'Exposition.ID_Exposition')
                     if (req.body[param] !== undefined) {
                         postOps[param] = req.body[param];
                     } else {
@@ -102,12 +143,20 @@ module.exports = (access_token) => {
         if (dopFunction.CheckToken(req.body.token, access_token)) {
             const updateOps = {};
             for (var param in req.body) {
-                if (param !== "_id" && param !== "exhibitImage")
+                if (param !== "_id" && param !== "exhibitImage" && param !== 'ID_Exposition')
                     updateOps[param] = req.body[param];
             }
             try {
                 updateOps["Image"] = req.file.destination + req.file.filename;
             } catch{ };
+            try {
+                updateOps["Exposition"] = {
+                    ID_Exposition: req.body.ID_Exposition,
+                    Date_Note: Date.now()
+                }
+                // updateOps.Exposition.Date_Note = Date.now();
+            } catch{ };
+            console.log(updateOps);
             Exhibit.updateOne({ _id: req.body._id }, { $set: updateOps })
                 .exec()
                 .then(result => {

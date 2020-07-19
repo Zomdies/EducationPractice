@@ -135,14 +135,15 @@ module.exports = (access_token) => {
             try {
                 updateOps["Image"] = req.file.destination + req.file.filename;
             } catch{ };
-            Exposition.updateOne({ _id: req.body._id }, { $set: updateOps })
+            Exposition.findOneAndUpdate({ _id: req.body._id }, { $set: updateOps },{ new: true }) 
                 .exec()
                 .then(result => {
                     if (result["n"] === 0) {
-                        res.status(404).json({
+                        res.status(404).json({  //Don't work because need return new object => i use findOneAndUpdate. If use updateOne, it will work.
                             message: "Error object with ID didn't found",
                         });
                     } else {
+                        Exposition.find({})
                         res.status(200).json({
                             message: "Object has been updated",
                             result: result
