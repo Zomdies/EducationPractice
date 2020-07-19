@@ -30,9 +30,9 @@
 
 .buttons-container > #accept:hover
 {
-    color: rgb(233, 255, 199);
+    color: rgb(207, 252, 140);
 }
 .buttons-container > #cancel:hover
 {
-    color: #ffcaca;
+    color: #fa8484;
 }

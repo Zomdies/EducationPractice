@@ -24,10 +24,10 @@ const App = () => {
     // var tokenLive = () => {
     //   fetch(`${server_url}/tokenLive`, {
     //     method: 'post',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
+        // headers: {
+        //   'Accept': 'application/json',
+        //   'Content-Type': 'application/json'
+        // },
     //     body: JSON.stringify({
     //       token: adminToken
     //     })

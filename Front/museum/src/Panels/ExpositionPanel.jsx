@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 // import '../Css/AdminPage.css'
 // import '../Css/Component/Cards.css'
 
-import {Card, CardContainer, ExpositionEditor,ExhibitsAddList, Warning} from '../Components'
+import { Card, CardContainer, 
+    ExpositionEditor, ExpositionAdd,
+    ExhibitsAddList, Warning,} from '../Components'
 
+import { setExposition } from '../Redux/actions'
 
 
 import expositionImage from '../Image/Exposition.jpg'
@@ -11,47 +15,82 @@ import expositionImage from '../Image/Exposition.jpg'
 import AddCircleOutline from '../Icons/add_circle_outline'
 import DeletOutline from '../Icons/delete_ouline'
 import EditOutline from '../Icons/edit_outline'
+import { SetExposition } from '../Redux/actions/exposition';
+import { server_url } from '../config';
 
+function formatDate(date) {
 
-const ExpositionPanel = (props) => {   
-    
-    const {setActivePopOut}=props
-    const warningMessage="You want delete exposition. Are you sure ?"
+    var dd = date.getDate();
+    if (dd < 10) dd = '0' + dd;
 
-    return(    
-    <div className="flex center">
-        <CardContainer columnCount={2}>    
-            <div className="card light flex center" style={{fontSize:32}} onClick={()=>{setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut}/>)}}><p>NEW</p></div>            
-            <Card 
-                image={expositionImage}
-                header={<p>This is Expostition</p>}
-                icons={<>                
-                        <DeletOutline onClick={()=>{setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut}/>)}}/>
-                        <AddCircleOutline onClick={()=>{setActivePopOut(<ExhibitsAddList setActivePopOut={setActivePopOut}/>)}}/>
-                        <EditOutline onClick={()=>{setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut}/>)}}/>
-                    </>} 
-                content={"Волк слабее льва и тигра, но в цирке волк не выступает"}
-            />
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-            <Card image={expositionImage}/>
-        </CardContainer>        
-    </div>);
+    var mm = date.getMonth() + 1;
+    if (mm < 10) mm = '0' + mm;
+
+    var yy = date.getFullYear() % 100;
+    if (yy < 10) yy = '0' + yy;
+
+    return dd + '.' + mm + '.' + yy;
+}
+
+const ExpositionPanel = (props) => {
+
+    const dispatch = useDispatch();
+    const { items } = useSelector(({ exposition }) => {
+        // console.log(exposition);
+        return ({
+            items: exposition.items,
+        })
+    })
+
+    useEffect(() => {
+        fetch(`${server_url}/exposition`)
+            .then(res => res.json())
+            .then(response => {
+                // console.log(result);
+                dispatch(SetExposition(response.result));
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, [])
+
+    const { setActivePopOut } = props
+    const warningMessage = "You want delete exposition. Are you sure ?"
+
+    return (
+        <div className="flex center">
+            <CardContainer columnCount={2}>
+                <div className="card light flex center" style={{ fontSize: 32 }} onClick={() => { setActivePopOut(<ExpositionAdd setActivePopOut={setActivePopOut}/>) }}><p>NEW</p></div>
+                {/* {loading && <Loader></Loader>} */}
+                {items !== undefined && items.map((item) => {
+                    return (
+                        <Card
+                            key={item._id}
+                            image={`${server_url}/${item.Image}`}
+                            header={<p>{item.Name}</p>}
+                            icons={<>
+                                <DeletOutline onClick={() => { setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut} item={item} />) }} />
+                                <AddCircleOutline onClick={() => { setActivePopOut(<ExhibitsAddList setActivePopOut={setActivePopOut} exposition={item} />) }} />
+                                <EditOutline onClick={() => { setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut} item={item} />) }} />
+                            </>}
+                            content={
+                                <>
+                                    <p>Status: {item.Status}</p>
+                                    <p>Date Open: {formatDate(new Date(item.Date_Open))}</p>
+                                    <p>Date Close: {formatDate(new Date(item.Date_Close))}</p>
+                                </>
+                            }
+                        />
+                    )
+                })
+                }
+            </CardContainer>
+        </div>);
 };
 
 export default ExpositionPanel;
 
 
-const linmap = (x,a,b,c,d)=>
-{
-    return c + (x-a) * (d-c) / (b-a)
+const linmap = (x, a, b, c, d) => {
+    return c + (x - a) * (d - c) / (b - a)
 }

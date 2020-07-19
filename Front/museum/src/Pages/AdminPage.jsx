@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 import {View, NavBar, LineLabels} from '../Components'
 import {ExpositionPanel, ExhibitsPanel, LineLogPanel} from "../Panels"
+import {  ResetStoreExhibit  } from '../Redux/actions';
+import {useDispatch} from 'react-redux'
 
 import '../Css/Pages/AdminPage.css'
 import '../Components/PopOut/css/PopOut.css'
 
 const AdminPanel = (props) => {    
 
+    const dispatch = useDispatch();
     const[activePanel,setActivePanel] = useState("EXPOSITIONS");    
 
     const[activePopOut, setActivePopOut] = useState(null);      
@@ -18,7 +21,7 @@ const AdminPanel = (props) => {
         <div className="Layout">
             {activePopOut !== null ?
                 <div className="container">
-                    <div className="filler"  onClick={()=>{setActivePopOut(null)}}/>
+                    <div className="filler"  onClick={()=>{setActivePopOut(null); dispatch(ResetStoreExhibit()); }}/>
                     {activePopOut}
                 </div>
                 :null
