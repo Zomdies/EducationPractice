@@ -24,3 +24,4 @@ export {default as Arrow } from './PreviewPage/Arrow/Arrow'
 
 // App's component
 export {default as Loader} from './Loader/loader'
+export {default as TokenVerification} from './AdminPage/TokenVerification/block'

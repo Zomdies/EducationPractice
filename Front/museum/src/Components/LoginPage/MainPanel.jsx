@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as cryptoJS from 'crypto-js'
+import {useDispatch, useSelector} from 'react-redux'
 
+import {setToken} from '../../Redux/actions'
 import './css/MainPanel.css'
 import { server_url } from '../../config'
 import { useHistory, } from 'react-router-dom';
@@ -9,6 +11,7 @@ import { useHistory, } from 'react-router-dom';
 export default function MainPanel(props) {
  
     let history = useHistory();
+    const dispatch = useDispatch();
     const [textMessage, setTextMessage] = useState(null);
 
     const Message = () => {
@@ -39,6 +42,7 @@ export default function MainPanel(props) {
                     case 200:
                         res.json().then(result => { 
                             document.cookie = "token="+result.token;
+                            dispatch(setToken(result.token));
                             // localStorage.setItem('token', result.token)
                             history.push('/admin') })
                         break;

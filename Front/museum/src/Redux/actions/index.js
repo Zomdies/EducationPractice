@@ -12,5 +12,6 @@ export {GetExhibitNotExposition, ResetStoreExhibit} from './exhibit'
 
 // App import 
 
-export {showLoader} from './app'
-export {hideLoader} from './app'
+export {showLoader, hideLoader} from './app'
+export {showTokenVerification, hideTokenVerification} from './app'
+export {setToken, checkToken} from './app'

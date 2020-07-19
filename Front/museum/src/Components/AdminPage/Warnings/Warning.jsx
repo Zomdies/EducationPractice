@@ -6,7 +6,7 @@ import { server_url } from '../../../config';
 import './Css/Warning.css'
 
 
-const Warning = ({message, setActivePopOut, item}) => {
+const Warning = ({message, setActivePopOut, item, token}) => {
 
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const Warning = ({message, setActivePopOut, item}) => {
             },
             body:JSON.stringify({
                 _id : item._id,
-                token : "123"
+                token : token
             })
         })
         .then(res =>{

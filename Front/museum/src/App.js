@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
-
+import {useDispatch, useSelector} from 'react-redux'
 
 import { HomePage, AdminPage, LoginPage, PreviewPage} from './Pages'
+import {checkToken} from './Redux/actions'
 
-import { token, server_url } from './config';
+import { server_url } from './config';
 
 
-// function getCookie(name) {
-//   let matches = document.cookie.match(new RegExp(
-//     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-//   ));
-//   return matches ? decodeURIComponent(matches[1]) : undefined;
-// }
+function getCookie(name) {
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
 
 const App = () => {
 
-  const [adminToken, setAdminToken] = useState(token);
+  const dispatch = useDispatch();
+  const { token } = useSelector(({app}) => {
+      return {
+          token : app.token
+      }
+  });
+  // console.log(getCookie("token"));
+  // dispatch(checkToken(getCookie("token")))
+  // const [adminToken, setAdminToken] = useState(token);
   let history = useHistory();
 
   useEffect(() => {
@@ -48,6 +57,7 @@ const App = () => {
     //     });
     // };
     // tokenLive();
+    dispatch(checkToken(getCookie("token")))
   }, []);
 
   return (
@@ -59,10 +69,10 @@ const App = () => {
         <PreviewPage/>
       </Route>
       <Route exact path='/admin' >
-        <AdminPage adminToken={adminToken} />
+        <AdminPage adminToken={token} />
       </Route>
       <Route exact path='/login'>
-        <LoginPage setAdminToken={setAdminToken} />
+        <LoginPage />
       </Route>      
       <Redirect from='/' to='/home' />
     </Switch>

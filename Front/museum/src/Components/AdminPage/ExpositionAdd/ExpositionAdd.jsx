@@ -10,7 +10,7 @@ import DismissOutline from '../../../Icons/dismiss_substract'
 import DoneOutline from '../../../Icons/done_substract'
 import defImage from '../../../Image/nophoto.png'
 
-const ExpositionAdd = ({ setActivePopOut }) => {
+const ExpositionAdd = ({ setActivePopOut, token }) => {
 
     const dispatch = useDispatch();
     const [expImage, setExpImage] = useState(null);
@@ -90,7 +90,7 @@ const ExpositionAdd = ({ setActivePopOut }) => {
             alert("Bad Status")
             return;
         }
-        data.append('token', '123')
+        data.append('token', token)
         fetch(`${server_url}/exposition`, {
             method: 'POST',
             body: data

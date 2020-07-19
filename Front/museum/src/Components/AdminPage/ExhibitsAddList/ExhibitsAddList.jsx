@@ -11,7 +11,7 @@ import { GetExhibitNotExposition, ResetStoreExhibit  } from '../../../Redux/acti
 import { server_url } from '../../../config';
 import { Loader } from '../..';
 
-const ExhibitsAddList = ({ exposition, setActivePopOut }) => {
+const ExhibitsAddList = ({ exposition, setActivePopOut, token }) => {
 
     const dispatch = useDispatch();
     const { items, loading } = useSelector(({ exhibit, app }) => {
@@ -38,7 +38,7 @@ const ExhibitsAddList = ({ exposition, setActivePopOut }) => {
             body: JSON.stringify({
                 _id: item._id,
                 ID_Exposition: exposition._id,
-                token: '123'
+                token: token
             })
         })
             .then(res => {

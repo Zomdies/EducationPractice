@@ -10,7 +10,7 @@ import DismissOutline from '../../../Icons/dismiss_substract'
 import DoneOutline from '../../../Icons/done_substract'
 import defImage from '../../../Image/nophoto.png'
 
-const ExpositionEditor = ({ item, setActivePopOut }) => {
+const ExpositionEditor = ({ item, setActivePopOut, token }) => {
 
     const dispatch = useDispatch();
     const imgSource = item !== undefined ? `${server_url}/${item.Image}` : null;
@@ -68,7 +68,7 @@ const ExpositionEditor = ({ item, setActivePopOut }) => {
         data.append('Name', document.getElementById("nameInput").value);
         data.append('Status', document.getElementById("selectStatus").value);
         data.append('_id', item._id);
-        data.append('token', '123')
+        data.append('token', token)
         fetch(`${server_url}/exposition`, {
             method: 'PATCH',
             body: data

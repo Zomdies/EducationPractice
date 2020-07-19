@@ -35,10 +35,11 @@ function formatDate(date) {
 const ExpositionPanel = (props) => {
 
     const dispatch = useDispatch();
-    const { items } = useSelector(({ exposition }) => {
+    const { items, token } = useSelector(({ exposition, app }) => {
         // console.log(exposition);
         return ({
             items: exposition.items,
+            token : app.token
         })
     })
 
@@ -60,7 +61,7 @@ const ExpositionPanel = (props) => {
     return (
         <div className="flex center">
             <CardContainer columnCount={2}>
-                <div className="card light flex center" style={{ fontSize: 32 }} onClick={() => { setActivePopOut(<ExpositionAdd setActivePopOut={setActivePopOut}/>) }}><p>NEW</p></div>
+                <div className="card light flex center" style={{ fontSize: 32 }} onClick={() => { setActivePopOut(<ExpositionAdd setActivePopOut={setActivePopOut} token={token}/>) }}><p>NEW</p></div>
                 {/* {loading && <Loader></Loader>} */}
                 {items !== undefined && items.map((item) => {
                     return (
@@ -69,9 +70,9 @@ const ExpositionPanel = (props) => {
                             image={`${server_url}/${item.Image}`}
                             header={<p>{item.Name}</p>}
                             icons={<>
-                                <DeletOutline onClick={() => { setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut} item={item} />) }} />
-                                <AddCircleOutline onClick={() => { setActivePopOut(<ExhibitsAddList setActivePopOut={setActivePopOut} exposition={item} />) }} />
-                                <EditOutline onClick={() => { setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut} item={item} />) }} />
+                                <DeletOutline onClick={() => { setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut} item={item} token={token} />) }} />
+                                <AddCircleOutline onClick={() => { setActivePopOut(<ExhibitsAddList setActivePopOut={setActivePopOut} exposition={item} token={token} />) }} />
+                                <EditOutline onClick={() => { setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut} item={item} token={token}/>) }} />
                             </>}
                             content={
                                 <>
