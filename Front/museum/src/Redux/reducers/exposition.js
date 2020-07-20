@@ -11,14 +11,15 @@ const exposition = (state = initialState, action) => {
     case ADD_EXPOSITION:
       return { ...state, items: state.items.concat(action.payload) }
     case UPDATE_EXPOSITION:
-      return { ...state, items: state.items.map((item) => {
-        if (item._id !== action.payload._id) {
-          return item
-        }else{
-          return action.payload
-        }
-      })
-    };
+      return {
+        ...state, items: state.items.map((item) => {
+          if (item._id !== action.payload._id) {
+            return item
+          } else {
+            return action.payload
+          }
+        })
+      };
     case DELETE_EXPOSITION:
       return { ...state, items: state.items.filter((item) => item._id !== action.payload._id) }
     default: return state;

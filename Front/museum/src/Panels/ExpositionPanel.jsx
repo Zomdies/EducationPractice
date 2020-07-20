@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 // import '../Css/AdminPage.css'
 // import '../Css/Component/Cards.css'
 
-import { Card, CardContainer, 
+import {
+    Card, CardContainer,
     ExpositionEditor, ExpositionAdd,
-    ExhibitsAddList, Warning,} from '../Components'
+    ExhibitsAddList, Warning,
+    ToolTip,
+} from '../Components'
 
-import { setExposition } from '../Redux/actions'
 
 
 import expositionImage from '../Image/Exposition.jpg'
@@ -39,7 +41,7 @@ const ExpositionPanel = (props) => {
         // console.log(exposition);
         return ({
             items: exposition.items,
-            token : app.token
+            token: app.token
         })
     })
 
@@ -61,18 +63,19 @@ const ExpositionPanel = (props) => {
     return (
         <div className="flex center">
             <CardContainer columnCount={2}>
-                <div className="card light flex center" style={{ fontSize: 32 }} onClick={() => { setActivePopOut(<ExpositionAdd setActivePopOut={setActivePopOut} token={token}/>) }}><p>NEW</p></div>
+                <div className="card light flex center" style={{ fontSize: 32 }} onClick={() => { setActivePopOut(<ExpositionAdd setActivePopOut={setActivePopOut} token={token} />) }}><p>NEW</p></div>
                 {/* {loading && <Loader></Loader>} */}
                 {items !== undefined && items.map((item) => {
                     return (
                         <Card
                             key={item._id}
                             image={`${server_url}/${item.Image}`}
+                            // header={<p>{item.Name}<ToolTip id="cardNameTip">{item.Name}</ToolTip></p>}
                             header={<p>{item.Name}</p>}
                             icons={<>
                                 <DeletOutline onClick={() => { setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut} item={item} token={token} />) }} />
                                 <AddCircleOutline onClick={() => { setActivePopOut(<ExhibitsAddList setActivePopOut={setActivePopOut} exposition={item} token={token} />) }} />
-                                <EditOutline onClick={() => { setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut} item={item} token={token}/>) }} />
+                                <EditOutline onClick={() => { setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut} item={item} token={token} />) }} />
                             </>}
                             content={
                                 <>

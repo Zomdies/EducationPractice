@@ -54,10 +54,10 @@ const Warning = ({message, setActivePopOut, item, token}) => {
                 {message}
             </div>
             <div className="buttons-container">
-                <div id="cancel" onClick={()=>{deleteRequest()}}>
+                <div id="accept" onClick={()=>{deleteRequest()}}>
                     YES
                 </div>
-                <div id="accept" onClick={()=>{setActivePopOut(null);}}>
+                <div id="cancel" onClick={()=>{setActivePopOut(null);}}>
                     NO
                 </div>
             </div>         

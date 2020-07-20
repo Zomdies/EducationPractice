@@ -27,7 +27,7 @@
     display: none;
     position: absolute !important;
     color: white;
-    font-size: 20px;
+    font-size: 20px;    
     /* width: 100% !important; */
     top: 80%;
     /* opacity: 100%; */
@@ -41,6 +41,7 @@
 #upload-container:hover .exp-image{
     /* display: block; */
     /* background-color: #0000003d; */
+    filter: brightness(40%);
     -webkit-filter: brightness(40%);
     /* opacity: 50%; */
     /* font-size: 100px; */
@@ -61,7 +62,6 @@
     flex-direction: column;
     width: 380px;
     height: 380px;
-    /* background-color: #ffffff; */
     color: #000000;
 }
 

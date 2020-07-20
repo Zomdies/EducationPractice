@@ -22,6 +22,7 @@ option
     font-size: 18px;
     color: white;
     overflow-y: scroll;
+    outline: none;
 }
 
 #discription::-webkit-scrollbar 

@@ -58,7 +58,17 @@
 {
     padding-left: 5px;
     font-size: 18px;
-    text-decoration:underline;
+    text-decoration:underline;   
+}
+
+.header > p{
+    height: 26px;
+
+    width: fit-content;
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .icons
@@ -79,6 +89,7 @@
 {
     font-size: 14px;
     padding-left: 5px;
+    text-overflow: ellipsis;
 }
 
 .flex

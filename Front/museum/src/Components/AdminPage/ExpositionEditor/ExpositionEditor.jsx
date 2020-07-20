@@ -8,7 +8,6 @@ import { server_url } from '../../../config'
 
 import DismissOutline from '../../../Icons/dismiss_substract'
 import DoneOutline from '../../../Icons/done_substract'
-import defImage from '../../../Image/nophoto.png'
 
 const ExpositionEditor = ({ item, setActivePopOut, token }) => {
 
@@ -94,7 +93,7 @@ const ExpositionEditor = ({ item, setActivePopOut, token }) => {
             }).catch(err => { alert("Porblems with Server") });
     }
 
-    const log = () => {
+    const onFileLoaded = () => {
         const inp = document.getElementById("file-input")
         const nameInp = document.getElementById("nameInput")
         if (!['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'].includes(inp.files[0].type)) {
@@ -113,9 +112,9 @@ const ExpositionEditor = ({ item, setActivePopOut, token }) => {
     return (
         <div className="editor-layout">
             <div className="flex-center" style={{ gridArea: "image" }}>
-                <div className="safq" id="upload-container">
+                <div id="upload-container">
                     {item.Image !== undefined ? (
-                        <img id="sd" className="exp-image" src={expImage} />
+                        <img className="exp-image" src={expImage} />
                     ) : (
                             <>
                                 <img id="upload-image" src={"https://habrastorage.org/webt/dr/qg/cs/drqgcsoh1mosho2swyk3kk_mtwi.png"} />
@@ -124,7 +123,7 @@ const ExpositionEditor = ({ item, setActivePopOut, token }) => {
 
                     }
                     <div className="add-image">
-                        <input id="file-input" type="file" name="file" accept=".jpg,.png" onInput={log} />
+                        <input id="file-input" type="file" name="file" accept=".jpg,.png" onInput={onFileLoaded} />
                         <label htmlFor="file-input">Выберите файл</label>
                         <span> или перетащите его сюда</span>
                     </div>
@@ -137,7 +136,7 @@ const ExpositionEditor = ({ item, setActivePopOut, token }) => {
             </div>
             <div style={{ gridArea: "content", paddingRight: 15 }}>
                 <span className="input-label">NAME</span>
-                <input id="nameInput" className="input-outline" type="text" />
+                <input id="nameInput" className="input-outline" type="text" required/>
                 <div className="flex-row">
                     <div>
                         <span className="input-label">OPEN DATE</span>

@@ -7,7 +7,10 @@ export {DeleteExposition} from './exposition'
 
 // Exhibit import
 export {GetExhibitNotExposition, ResetStoreExhibit} from './exhibit'
-
+export {SetExhibit} from './exhibit'
+export {AddExhibit} from './exhibit'
+export {UpdateExhibit} from './exhibit'
+export {DeleteExhibit} from './exhibit'
 
 
 // App import 
