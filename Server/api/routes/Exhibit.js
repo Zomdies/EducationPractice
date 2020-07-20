@@ -157,12 +157,12 @@ module.exports = (access_token) => {
                 // updateOps.Exposition.Date_Note = Date.now();
             } catch{ };
             console.log(updateOps);
-            Exhibit.updateOne({ _id: req.body._id }, { $set: updateOps })
+            Exhibit.findOneAndUpdate({ _id: req.body._id }, { $set: updateOps }, { new: true })
                 .exec()
                 .then(result => {
                     if (result["n"] === 0) {
                         res.status(404).json({
-                            message: "Error object with ID didn't found",
+                            message: "Error object with ID didn't found", //Don't work because need return new object => i use findOneAndUpdate. If use updateOne, it will work.
                         });
                     } else {
                         res.status(200).json({
