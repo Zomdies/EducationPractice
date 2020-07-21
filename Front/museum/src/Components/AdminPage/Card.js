@@ -10,10 +10,11 @@ const Card = (props) => {
     const {headerStyle} = props;
     const {content} = props;
     const {contentStyle} = props;
+    const {onClick} = props;
     
 
     return(
-            <div className="card layout">
+            <div className="card layout" onClick={()=>{if(onClick !== undefined) onClick()}}>
                 <div className="flex center" style={{gridArea:"image"}}><img className="min-image" style={{...imageStyle}} src={image}/></div>
                 <div className="header" style={{ ...headerStyle, gridArea:"header"}}>{header}</div>
                 <div className="content" style={{ ...contentStyle, gridArea:"content"}}>{content}</div>

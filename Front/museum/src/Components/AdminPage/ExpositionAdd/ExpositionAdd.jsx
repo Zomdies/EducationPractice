@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AddExposition } from '../../../Redux/actions'
 import './ExpositionAdd.css'
 
@@ -11,6 +11,7 @@ import defImage from '../../../Image/nophoto.png'
 
 const ExpositionAdd = ({ setActivePopOut, token }) => {
 
+    //#region Validation
     const validate = require("validate.js");
 
     validate.extend(validate.validators.datetime, {
@@ -64,12 +65,25 @@ const ExpositionAdd = ({ setActivePopOut, token }) => {
         },
         image: { presence: true },
     }
+    //#endregion
+    
+    const StatusEnum = Object.freeze({ "Used": 1, "Transported": 2, "Restored": 3 })
+    const Floors=[{name:1},{name:1},{name:1},{name:1},]
 
     const dispatch = useDispatch();
     const [expImage, setExpImage] = useState(null);
-    const [badDate, setBadDate] = useState(null);
+    const [expStatus, setExpStatus] = useState(null);
+
+    // const { Floors, halls } = useSelector(({ exposition, app }) => {
+    //     // console.log(exposition);
+    //     return ({
+    //         items: exposition.items,
+    //         token: app.token
+    //     })
+    // })
 
     useEffect(() => {
+        //#region Drag&Drop
         const inp = document.getElementById("file-input")
         const dropZone = document.getElementById("upload-container")
 
@@ -103,11 +117,15 @@ const ExpositionAdd = ({ setActivePopOut, token }) => {
                 dropZone.classList.remove("dragover")
             };
         })
+        //#endregion
         const today = new Date();
         document.getElementById("selectStatus").value = null;
         document.getElementById("date-open").value = toInputDate(today);
         document.getElementById("date-close").value = toInputDate(today);
     }, [])
+
+    useEffect(() => {
+    }, [expStatus])
 
     const postExposition = () => {
         const inp = document.getElementById("file-input");
@@ -225,7 +243,7 @@ const ExpositionAdd = ({ setActivePopOut, token }) => {
             </div>
             <div style={{ gridArea: "content", paddingRight: 15 }}>
                 <span className="input-label">NAME</span>
-                <input id="nameInput" className="input-outline" type="text" placeholder="Write name here" />
+                <input id="nameInput" className="input-outline" type="text" placeholder="Write name here" autoComplete="off"/>
                 <div className="flex-row">
                     <div>
                         <span className="input-label">OPEN DATE</span>
@@ -237,11 +255,26 @@ const ExpositionAdd = ({ setActivePopOut, token }) => {
                     </div>
                 </div>
                 <span className="input-label">STATUS</span>
-                <select id="selectStatus" className="input-outline">
-                    <option value="Used">Used</option>
-                    <option value="Transported">Transported</option>
-                    <option value="Restored">Restored</option>
+                <select id="selectStatus" className="input-outline" onChange={() => { setExpStatus(document.getElementById("selectStatus").value) }}>
+                    <option value={StatusEnum.Used}>Used</option>
+                    <option value={StatusEnum.Transported}>Transported</option>
+                    <option value={StatusEnum.Restored}>Restored</option>
                 </select >
+                {expStatus === StatusEnum.Used.toString() ?
+                    <div className="flex-row left">
+                        <div>
+                            <span className="input-label">Floor</span>
+                            <select id="selectFloor" className="input-outline">
+                                
+                            </select >
+                        </div>
+                        <div>
+                            <span className="input-label">Hall</span>
+                            <select id="selectHall" className="input-outline">
+                                
+                            </select >
+                        </div>
+                    </div> : null}
             </div>
         </div>
     );

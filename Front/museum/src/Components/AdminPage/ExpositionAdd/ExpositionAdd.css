@@ -42,6 +42,7 @@
     /* display: block; */
     /* background-color: #0000003d; */
     -webkit-filter: brightness(40%);
+    filter: brightness(40%);
     /* opacity: 50%; */
     /* font-size: 100px; */
 }
@@ -131,4 +132,15 @@
 .flex-row {
     display: flex;
     justify-content: space-between;
+}
+
+.flex-row.left
+{
+    justify-content: left;
+}
+
+.flex-row.left > *
+{
+    margin-right: 10px;
+    width: 90px;
 }

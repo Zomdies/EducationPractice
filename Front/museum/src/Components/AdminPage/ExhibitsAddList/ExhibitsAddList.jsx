@@ -7,29 +7,45 @@ import SearchOutline from '../../../Icons/search_outline'
 import defImage from '../../../Image/nophoto.png'
 
 import './Css/ExhibitsAddList.css'
-import { GetExhibitNotExposition, ResetStoreExhibit  } from '../../../Redux/actions';
+import { GetExhibitNotExposition, ResetStoreExhibit, SetExhibit } from '../../../Redux/actions';
 import { server_url } from '../../../config';
 import { Loader } from '../..';
 
-const ExhibitsAddList = ({ exposition, setActivePopOut, token }) => {
+const ExhibitsAddList = (props) => {
+    const { exposition } = props
+    const { setActivePopOut } = props
+    const { token } = props
 
     const dispatch = useDispatch();
     const { items, loading } = useSelector(({ exhibit, app }) => {
         // console.log(exhibit);
         return {
             items: exhibit.items,
-            loading : app.loading
+            loading: app.loading
         }
     });
 
-    let selected = [];
+    const [searchFilter, setSearchFilter] = useState(null)
 
     useEffect(() => {
-        dispatch(GetExhibitNotExposition(exposition._id));
-
+        // dispatch(GetExhibitNotExposition(exposition._id));
+        fetch(`${server_url}/exhibit`)
+            .then(res => res.json())
+            .then(response => {
+                dispatch(SetExhibit(response.result.filter(item => item.Exposition.ID_Exposition === null || item.Exposition.ID_Exposition === exposition._id)));
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }, [])
 
-    const postAddExhibitInExposition = (item) => {
+    const searchChange = (e) => {
+        const inp = document.getElementById("searchInp")
+        if (inp.value.trim().length == 0) setSearchFilter(null)
+        else setSearchFilter(inp.value)
+    }
+
+    const postAddExhibitInExposition = (item, remove = false) => {
         fetch(`${server_url}/exhibit`, {
             method: "PATCH",
             headers: {
@@ -37,20 +53,25 @@ const ExhibitsAddList = ({ exposition, setActivePopOut, token }) => {
             },
             body: JSON.stringify({
                 _id: item._id,
-                ID_Exposition: exposition._id,
+                ID_Exposition: remove ? null : exposition._id,
                 token: token
             })
         })
             .then(res => {
                 switch (res.status) {
                     case 200:
-                        res.json().then(result => {
-                            console.log(result);
-                            dispatch(GetExhibitNotExposition(exposition._id));
-                            // document.cookie = "token="+result.token;
-                            // localStorage.setItem('token', result.token)
-                            // history.push('/admin') })
-                        })
+                        fetch(`${server_url}/exhibit`)
+                            .then(res => res.json())
+                            .then(response => {
+                                dispatch(SetExhibit(response.result.filter(item => item.Exposition.ID_Exposition === null || item.Exposition.ID_Exposition === exposition._id)));
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                        // res.json().then(result => {
+                        //     console.log(result);
+                        //     dispatch(GetExhibitNotExposition(exposition._id));
+                        // })
                         break;
                     case 404:
                         alert("ERROR Login uncorrect");
@@ -62,6 +83,11 @@ const ExhibitsAddList = ({ exposition, setActivePopOut, token }) => {
             })
     }
 
+    const serching = (item) => {
+        if (searchFilter === null) return (item);
+        if (item.Name.toLowerCase().includes(searchFilter.toLowerCase())) return (item)
+    }
+
     return (
         <div className="list-container">
             <div id="top-line" className="flex-row y-center">
@@ -70,20 +96,18 @@ const ExhibitsAddList = ({ exposition, setActivePopOut, token }) => {
             </div>
             <div id="search">
                 <div id="icon"><SearchOutline color="#323232" /></div>
-                <input type="text" className="input" placeholder="Search" />
+                <input id="searchInp" type="text" className="input" placeholder="Search" onChange={searchChange} />
             </div>
             {loading && <Loader></Loader>}
             <div className="exhibts-container">
-                {items.map(item => {
+                {items.filter(serching).map(item => {
+                    const included = item.Exposition.ID_Exposition === exposition._id;
+                    const buttonText = included ? "REMOVE" : "ADD";
                     return (
-                        <div key={item._id} className="check-card">
+                        <div key={item._id} className={`check-card ${included ? "included" : ""}`}>
                             <img src={`${server_url}/${item.Image}`} />
                             <p>{item.Name}</p>
-                            <button onClick={() => { postAddExhibitInExposition(item) }}>ADD</button>
-                            {/* <input type="checkbox" className="custom-checkbox" id="include"  /> */}
-                            {/* <p>Age: {item.Age}</p>
-                            <p>Description: {item.Description}</p> */}
-                            <label htmlFor="include"></label>
+                            <button onClick={() => { postAddExhibitInExposition(item, included) }}>{buttonText}</button>
                         </div>
                     )
                 })}

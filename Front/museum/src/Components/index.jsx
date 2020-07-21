@@ -8,6 +8,7 @@ export {default as ExpositionAdd} from './AdminPage/ExpositionAdd/ExpositionAdd'
 export {default as ExhibitsAddList} from "./AdminPage/ExhibitsAddList/ExhibitsAddList"
 export {default as ExhibitEditor} from "./AdminPage/ExhibitEditor/ExhibitEditor"
 export {default as Warning} from "./AdminPage/Warnings/Warning"
+export {default as ExhibitAdd} from "./AdminPage/ExhibitAdd/ExhibitAdd"
 
 // HomePage's components
 export {default as LineLabels } from './HomePage/LineLabels'

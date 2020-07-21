@@ -85,16 +85,21 @@
     width: 100%;
 
     display: grid;
-    grid-template-columns: 100px 1fr 30px;
+    grid-template-columns: 100px 1fr 95px;
     grid-template-rows: 100px;
-    grid-template-areas: "image content checkbox";
+    grid-template-areas: "image content button";
 
     justify-items: center;
     align-items: center;
 
     border-radius: 5.5px;
     box-sizing: border-box;
-    border: 3px solid white;
+    border: 3px solid #9e6c6c;
+}
+
+.check-card.included
+{
+    border-color: #cdffbe;
 }
 
 .check-card > img
@@ -112,11 +117,36 @@
     align-self: start;
     font-size: 18px;
     text-decoration:underline;
+    height: 25px;
+    width: -moz-fit-content;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
-.check-card > input
+
+.check-card > button
 {
-    grid-area: checkbox;
+    grid-area: button;
+    background-color: transparent;
+    font-family: Oswald;
+    font-size: 14px;
+    border: none;
+    color: white;
+    z-index: 5;
+    outline: none;
 }
+
+/* .check-card > button:hover::after
+{
+    z-index: 1;
+    position: absolute;;
+    content:"sad";
+    height: 25px;
+    width: 50px;
+    border: 3px solid white;
+    transform: scaleX(-1);
+} */
 
 .y-center
 {

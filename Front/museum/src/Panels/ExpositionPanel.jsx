@@ -17,7 +17,7 @@ import expositionImage from '../Image/Exposition.jpg'
 import AddCircleOutline from '../Icons/add_circle_outline'
 import DeletOutline from '../Icons/delete_ouline'
 import EditOutline from '../Icons/edit_outline'
-import { SetExposition } from '../Redux/actions/exposition';
+import { SetExposition, DeleteExposition} from '../Redux/actions/exposition';
 import { server_url } from '../config';
 
 function formatDate(date) {
@@ -57,6 +57,42 @@ const ExpositionPanel = (props) => {
             });
     }, [])
 
+
+    const deleteRequest = (item) =>{
+        
+        fetch(`${server_url}/exposition`,{
+            method: "DELETE",
+            headers :{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                _id : item._id,
+                token : token
+            })
+        })
+        .then(res =>{
+            switch (res.status) {
+                case 200:
+                    res.json().then(response => {
+                        alert("Exposition Delete");
+                        // console.log(response);
+                        dispatch(DeleteExposition(item));
+                        setActivePopOut(null);
+                    });
+                    break;
+                case 404:
+                    alert("Porblems with Server")
+                    break;
+                case 500:
+                    alert("Porblems with Server")
+                    break;
+            }
+        })
+        .catch(err => alert("Server Error"));
+        setActivePopOut(null);
+    }
+
     const { setActivePopOut } = props
     const warningMessage = "You want delete exposition. Are you sure ?"
 
@@ -73,7 +109,7 @@ const ExpositionPanel = (props) => {
                             // header={<p>{item.Name}<ToolTip id="cardNameTip">{item.Name}</ToolTip></p>}
                             header={<p>{item.Name}</p>}
                             icons={<>
-                                <DeletOutline onClick={() => { setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut} item={item} token={token} />) }} />
+                                <DeletOutline onClick={() => { setActivePopOut(<Warning message={warningMessage} setActivePopOut={setActivePopOut} item={item} onAccept={deleteRequest} />) }} />
                                 <AddCircleOutline onClick={() => { setActivePopOut(<ExhibitsAddList setActivePopOut={setActivePopOut} exposition={item} token={token} />) }} />
                                 <EditOutline onClick={() => { setActivePopOut(<ExpositionEditor setActivePopOut={setActivePopOut} item={item} token={token} />) }} />
                             </>}

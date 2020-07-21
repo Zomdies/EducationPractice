@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 
-import './Css/ExhibitEditor.css'
+import './Css/ExhibitAdd.css'
 
-import { UpdateExhibit } from '../../../Redux/actions'
+import { AddExhibit } from '../../../Redux/actions'
 import { server_url } from '../../../config'
 
 import DismissOutline from '../../../Icons/dismiss_substract'
 import DoneOutline from '../../../Icons/done_substract'
 import defImage from '../../../Image/nophoto.png'
 
-const ExhibitEditor = (props) => {
+const ExhibitAdd = (props) => {
     const { item } = props
     const { setActivePopOut } = props
     const { token } = props
@@ -41,22 +41,15 @@ const ExhibitEditor = (props) => {
 
     const dispatch = useDispatch();
 
-    const imgSource = item !== undefined ? `${server_url}/${item.Image}` : null;
-    const [exhImage, setExhImage] = useState(imgSource)
+    const [exhImage, setExhImage] = useState(null)
 
     useEffect(() => {
         daragAndDropInit()
-        document.getElementById("nameInput").value = item.Name;
-        document.getElementById("ageInput").value = item.Age;
-        document.getElementById("discription").value = item.Description;
-        console.log(document.getElementById("file-input").files)
-        // document.getElementById("file-input").files = new FileList(item.Image);
     }, [])
 
     const onFileLoaded = () => {
         const inp = document.getElementById("file-input")
         const nameInp = document.getElementById("nameInput")
-        // nameInp.value = inp.files[0].name.slice(0, -4)
         setExhImage(URL.createObjectURL(inp.files[0]))
     }
 
@@ -96,15 +89,15 @@ const ExhibitEditor = (props) => {
         })
     }
 
-    const patchExhibit = () => {
+    const postExhibit = () => {
         const inp = document.getElementById("file-input");
         let data = new FormData();
 
         const Name = document.getElementById("nameInput").value;
         const Age = document.getElementById("ageInput").value;
         const Discription = document.getElementById("discription").value;
-        
-        const valRes =validate({
+
+        const valRes = validate({
             name: Name,
             Age: Age,
             image: inp.files[0],
@@ -114,23 +107,22 @@ const ExhibitEditor = (props) => {
         //     alert(createAleretFromValidation(valRes))
         //     return;
         // }
-        data.append('expositionImage', inp.files[0]);
         data.append('Name', Name);
         data.append('Age', Age);
         data.append('Description', Discription);
-        data.append('_id', item._id);
+        data.append('exhibitImage', inp.files[0]);
         data.append('token', token)
 
         fetch(`${server_url}/exhibit`, {
-            method: 'PATCH',
+            method: 'POST',
             body: data
         })
             .then(res => {
                 switch (res.status) {
                     case 200:
                         res.json().then(response => {
-                            alert("Exhibit Updated");
-                            dispatch(UpdateExhibit(response.result))
+                            alert("Exhibit Added");
+                            dispatch(AddExhibit(response.result))
                             setActivePopOut(null);
                         });
                         break;
@@ -149,16 +141,8 @@ const ExhibitEditor = (props) => {
     return (
         <div className="editor-layout">
             <div className="flex-center" style={{ gridArea: "image" }}>
-                <div id="upload-container">
-                    {item.Image !== undefined ? (
-                        <img className="exp-image" src={exhImage} />
-                    ) : (
-                            <>
-                                <img id="upload-image" src={"https://habrastorage.org/webt/dr/qg/cs/drqgcsoh1mosho2swyk3kk_mtwi.png"} />
-                            </>
-                        )
-
-                    }
+                <div className="safq" id="upload-container">
+                    <img className="exp-image" src={exhImage !== null ? (exhImage) : (defImage)} />
                     <div className="add-image">
                         <input id="file-input" type="file" name="file" accept=".jpg,.png" onInput={onFileLoaded} />
                         <label htmlFor="file-input">Выберите файл</label>
@@ -167,14 +151,14 @@ const ExhibitEditor = (props) => {
                 </div>
             </div>
             <div className="icons-container" style={{ gridArea: "icons" }}>
-                <DoneOutline onClick={() => { patchExhibit() }} />
+                <DoneOutline onClick={() => { postExhibit() }} />
                 <DismissOutline onClick={() => { setActivePopOut(null) }} />
             </div>
             <div style={{ gridArea: "content", paddingRight: 15 }}>
                 <span className="input-label">NAME</span>
-                <input id="nameInput" className="input-outline" type="text" autoComplete="off"/>
+                <input id="nameInput" className="input-outline" type="text" autoComplete="off" />
                 <span className="input-label">AGE</span>
-                <input id="ageInput" className="input-outline" type="number" autoComplete="off"/>
+                <input id="ageInput" className="input-outline" type="number" autoComplete="off" />
                 <span className="input-label">DISCRIPTION</span>
                 <textarea id="discription">
                 </textarea>
@@ -183,7 +167,7 @@ const ExhibitEditor = (props) => {
     );
 };
 
-export default ExhibitEditor;
+export default ExhibitAdd;
 
 const createAleretFromValidation = (validation) => {
     let output = ""

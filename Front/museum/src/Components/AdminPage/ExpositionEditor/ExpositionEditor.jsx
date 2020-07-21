@@ -11,6 +11,61 @@ import DoneOutline from '../../../Icons/done_substract'
 
 const ExpositionEditor = ({ item, setActivePopOut, token }) => {
 
+    //#region Validation
+    const validate = require("validate.js");
+
+    validate.extend(validate.validators.datetime, {
+        
+        parse: function (value, options) {
+            return value;
+        },
+
+        format: function (value, options) {
+            return value;
+        }
+    });
+
+    const toDay = new Date();
+
+    const constraints =
+    {
+        name: {
+            presence: { allowEmpty: false },
+            length: {
+                minimum: 6,
+                tooShort: "name needs to have 6 chars or more",
+            }
+        },
+        status: { presence: { allowEmpty: false } },
+        date_open: {
+            presence: true,
+            exclusion: {
+                within: new Date("das"),
+                message: "^We don't support %{value} right now, sorry"
+            },
+            date: {
+                earliest: toDay,
+                message: " can't be early than today",
+            }
+        },
+        date_close: {
+            presence: true,
+            date: {
+                earliest: toDay,
+                message: " can't be early than today",
+            },
+            equality: {
+                attribute: "date_open",
+                message: " can't be same date as open date",
+                comparator: (d1, d2) => {
+                    return JSON.stringify(d1) !== JSON.stringify(d2);
+                }
+            }
+        },
+        image: { presence: true },
+    }
+    //#endregion
+
     const dispatch = useDispatch();
     const imgSource = item !== undefined ? `${server_url}/${item.Image}` : null;
     const [expImage, setExpImage] = useState(imgSource)
@@ -49,8 +104,13 @@ const ExpositionEditor = ({ item, setActivePopOut, token }) => {
                 dropZone.classList.remove("dragover")
             };
         })
-        document.getElementById("date-open").valueAsDate = new Date(item.Date_Open);
-        document.getElementById("date-close").valueAsDate = new Date(item.Date_Close);
+        const now = new Date();
+        const closeDate = document.getElementById("date-close")
+        const openDate = document.getElementById("date-open")
+        openDate.valueAsDate = new Date(item.Date_Open);                
+        closeDate.valueAsDate = new Date(item.Date_Close);       
+        if (new Date(openDate.value) < now) openDate.setAttribute("disabled","true")
+        if (new Date(closeDate.value) < now) closeDate.setAttribute("disabled","true")
         document.getElementById("nameInput").value = item.Name;
         document.getElementById("selectStatus").value = item.Status;
     }, [])
@@ -136,7 +196,7 @@ const ExpositionEditor = ({ item, setActivePopOut, token }) => {
             </div>
             <div style={{ gridArea: "content", paddingRight: 15 }}>
                 <span className="input-label">NAME</span>
-                <input id="nameInput" className="input-outline" type="text" required/>
+                <input id="nameInput" className="input-outline" type="text" required autoComplete="off"/>
                 <div className="flex-row">
                     <div>
                         <span className="input-label">OPEN DATE</span>

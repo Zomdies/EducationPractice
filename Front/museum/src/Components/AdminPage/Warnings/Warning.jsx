@@ -1,50 +1,15 @@
 import React  from 'react';
-import {useDispatch} from 'react-redux'
-
-import {DeleteExposition} from '../../../Redux/actions'
-import { server_url } from '../../../config';
 import './Css/Warning.css'
 
 
-const Warning = ({message, setActivePopOut, item, token}) => {
+const Warning = (props) => {
 
-    const dispatch = useDispatch();
+    const {message} = props
+    const {setActivePopOut} = props
+    const {item} = props
+    const {onAccept} = props
+    const {onCancel} = props
 
-    const deleteRequest = () =>{
-        
-        fetch(`${server_url}/exposition`,{
-            method: "DELETE",
-            headers :{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-                _id : item._id,
-                token : token
-            })
-        })
-        .then(res =>{
-            switch (res.status) {
-                case 200:
-                    res.json().then(response => {
-                        alert("Exposition Delete");
-                        // console.log(response);
-                        dispatch(DeleteExposition(item));
-                        setActivePopOut(null);
-                    });
-                    break;
-                case 404:
-                    alert("Porblems with Server")
-                    break;
-                case 500:
-                    alert("Porblems with Server")
-                    break;
-            }
-        })
-        .catch(err => alert("Server Error"));
-        setActivePopOut(null);
-    }
-    // console.log(item);
     return (
         <div className="warning-container">   
             <div className="warning-name">
@@ -54,10 +19,10 @@ const Warning = ({message, setActivePopOut, item, token}) => {
                 {message}
             </div>
             <div className="buttons-container">
-                <div id="accept" onClick={()=>{deleteRequest()}}>
+                <div id="accept" onClick={()=>{if(onAccept !== undefined) onAccept(item)}}>
                     YES
                 </div>
-                <div id="cancel" onClick={()=>{setActivePopOut(null);}}>
+                <div id="cancel" onClick={()=>{if(onCancel !== undefined) onCancel(item);setActivePopOut(null);}}>
                     NO
                 </div>
             </div>         
