@@ -35,7 +35,7 @@ const ExpositionPanel = (props) => {
             .catch(err => {
                 console.log(err);
             });
-    })
+    },[])
 
     const setExhibits = (exposition) => {
         setChoosenExposition(exposition)
@@ -72,8 +72,11 @@ const ExpositionPanel = (props) => {
                         <p style={{ fontSize: 32 }}>EXPOSITIONS</p>
                     </div>
                     <CardContainer columnCount={1} style={{ paddingTop: 20, height: 750, boxShadow: "none" }}>
-                        {expositions.map(exp =>
-                            <Card key={exp.Name}
+                        {expositions.map((exp, index) =>
+                            <Card
+                                tabindex={index}                                
+                                className={"chooseabel"}
+                                key={exp.Name}
                                 image={`${server_url}/${exp.Image}`}
                                 header={<p>{exp.Name}</p>}
                                 content={

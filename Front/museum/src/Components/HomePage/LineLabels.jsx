@@ -16,13 +16,27 @@ const LineLabels = ({labels, labelSize, labelAlign="left", lineHeight, lineWidth
         isolation: "isolate"     
     }
     mainstyle[pageAlign] = pageMargin;        
+
+    // useEffect(()=>{
+    //     console.log(document.getElementsByName("label"))
+    //     let labels = document.getElementsByName("label"); 
+    //     let g = document.getElementById("b")       
+    //     window.addEventListener("scroll",(function(){ 
+    //         for(let l of labels)                       
+    //         if ( window.scrollY + window.innerHeight-50> l.offsetTop ) {
+    //             l.classList.add("animate")
+    //         }
+    //     }))
+    // })
     
     return(
         <div style={mainstyle}>                        
             {labels? 
                     labels.map((lab,index) => {return(
                         <>
-                            <div
+                            <div id="b"
+                                className="nav-map-label"
+                                name="label"
                                 style={{
                                     textAlign: labelAlign, 
                                     fontSize:labelSize, 

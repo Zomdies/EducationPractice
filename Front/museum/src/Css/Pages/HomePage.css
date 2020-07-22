@@ -52,7 +52,7 @@
     grid-gap: 5px;    
     grid-template: repeat(6,50px)/repeat(13,50px);
     grid-auto-rows: 50px;
-    grid-auto-flow: dense;
+    /* grid-auto-flow: dense; */
 }
 
 .hall
@@ -82,4 +82,41 @@ body{
     font-style: normal;
     font-weight: normal;
     color: #FFFFFF;
+}
+
+
+.floor1
+{
+    grid-template-areas: 
+        "hall1 hall1 hall1 hall1 hall2 hall2 hall2 hall3 hall3 hall3 hall4 hall4 hall4"
+        "hall1 hall1 hall1 hall1 hall2 hall2 hall2 hall3 hall3 hall3 hall4 hall4 hall4"
+        "hall5 hall5 ..... ..... ..... ..... hall7 hall7 hall7 hall7 hall9 hall9 hall9"
+        "hall5 hall5 ..... ..... ..... ..... hall7 hall7 hall7 hall7 hall9 hall9 hall9"
+        "hall6 hall6 hall6 ..... ..... ..... ..... hall8 hall8 hall8 hall9 hall9 hall9"
+        "hall6 hall6 hall6 ..... ..... ..... ..... hall8 hall8 hall8 hall9 hall9 hall9"
+    ;
+}
+
+.floor2
+{
+    grid-template-areas:               
+    "hall5 hall5 hall5 hall1 hall1 hall2 hall2 hall2 hall3 hall3 hall3 hall4 hall4"
+    "hall5 hall5 hall5 hall1 hall1 hall2 hall2 hall2 hall3 hall3 hall3 hall4 hall4"
+    "hall5 hall5 hall5 ..... ..... ..... hall7 hall7 hall7 hall7 hall7 hall4 hall4"
+    "hall5 hall5 hall5 ..... ..... ..... hall7 hall7 hall7 hall7 hall7 hall4 hall4"
+    "hall6 hall6 ..... ..... ..... ..... hall8   hall8 hall8 hall8 hall9 hall9 hall9"
+    "hall6 hall6 ..... ..... ..... ..... hall8 hall8 hall8 hall8 hall9 hall9 hall9"
+    ;
+}
+
+.floor3
+{
+    grid-template-areas: 
+        "hall1 hall1 hall1 hall1 ..... ..... hall2 hall2 hall2 hall3 hall3 hall3 hall3"
+        "hall1 hall1 hall1 hall1 ..... ..... hall2 hall2 hall2 hall3 hall3 hall3 hall3"
+        "hall1 hall1 hall1 hall1 ..... ..... hall2 hall2 hall2 hall4 hall4 hall5 hall5"
+        "hall1 hall1 hall1 hall1 ..... ..... hall2 hall2 hall2 hall4 hall4 hall5 hall5"
+        "hall1 hall1 hall1 hall1 ..... ..... ..... hall6 hall6 hall6 hall6 hall5 hall5"
+        "hall1 hall1 hall1 hall1 ..... ..... ..... hall6 hall6 hall6 hall6 hall5 hall5"
+    ;
 }

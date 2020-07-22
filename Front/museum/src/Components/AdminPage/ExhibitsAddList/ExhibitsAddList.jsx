@@ -107,7 +107,7 @@ const ExhibitsAddList = (props) => {
                         <div key={item._id} className={`check-card ${included ? "included" : ""}`}>
                             <img src={`${server_url}/${item.Image}`} />
                             <p>{item.Name}</p>
-                            <button onClick={() => { postAddExhibitInExposition(item, included) }}>{buttonText}</button>
+                            <div class="animB"><button className="actionButton" onClick={() => { postAddExhibitInExposition(item, included) }}>{buttonText}</button></div>
                         </div>
                     )
                 })}

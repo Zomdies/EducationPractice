@@ -16,6 +16,40 @@ import '../Css/Pages/HomePage.css'
 const about="Ricardo, Obama, Bonk, JoJo. Once upon a time, four memes lived in peace. But soon the Bonk meme started a war. Only the admin-the master of all four memes, could stop the invaders. But when the world needed him most – he ate and fell asleep. It took 10 hours and my brother and I found a new admin in the public – users named Aang. Although his skill as a public admin was great, he still had a lot to learn… But I believed that the user would save the world!"
 
 
+const hallsF1=[
+  {id:1},
+  {id:2},
+  {id:3},
+  {id:4},
+  {id:5},
+  {id:6},
+  {id:7},
+  {id:8},
+  {id:9},
+]
+
+const hallsF2=[
+  {id:1},
+  {id:2},
+  {id:3},
+  {id:4},
+  {id:5},
+  {id:6},
+  {id:7},
+  {id:8},
+  {id:9},
+]
+
+const hallsF3=[
+  {id:1},
+  {id:2},
+  {id:3},
+  {id:4},
+  {id:5},
+  {id:6},
+]
+
+
 const MainScreen = (props) => {
   return (
     <>
@@ -47,61 +81,11 @@ const MainScreen = (props) => {
         contenMarginTop={220}
         content=
         {
-          <div className="floor-box">
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 3,
-              gridColumnStart: 1,
-              gridColumnEnd: 5,
-            }}><p>Hall 1</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 3,
-              gridColumnStart: 5,
-              gridColumnEnd: 8,
-            }}><p>Hall 2</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 3,
-              gridColumnStart: 8,
-              gridColumnEnd: 11,
-            }}><p>Hall 3</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 3,
-              gridColumnStart: 11,
-              gridColumnEnd: 14,
-            }}><p>Hall 4</p></div>
-            <div className="hall" style={{
-              gridRowStart: 3,
-              gridRowEnd: 5,
-              gridColumnStart: 1,
-              gridColumnEnd: 3,
-            }}><p>Hall 5</p></div>
-            <div className="hall" style={{
-              gridRowStart: 5,
-              gridRowEnd: 7,
-              gridColumnStart: 1,
-              gridColumnEnd: 4,
-            }}><p>Hall 6</p></div>
-            <div className="hall" style={{
-              gridRowStart: 3,
-              gridRowEnd: 5,
-              gridColumnStart: 7,
-              gridColumnEnd: 11,
-            }}><p>Hall 7</p></div>
-            <div className="hall" style={{
-              gridRowStart: 5,
-              gridRowEnd: 7,
-              gridColumnStart: 8,
-              gridColumnEnd: 11,
-            }}><p>Hall 8</p></div>
-            <div className="hall" style={{
-              gridRowStart: 3,
-              gridRowEnd: 7,
-              gridColumnStart: 11,
-              gridColumnEnd: 14,
-            }}><p>Hall 9</p></div>
+          <div className="floor-box floor1">
+            {hallsF1.map((hall,index) =>
+              {
+                return(<div key={hall.id} style={{gridArea:`hall${index+1}`}} className="hall"><p>Hall {index+1}</p></div>)
+              })}            
           </div>
         }
       >
@@ -117,67 +101,17 @@ const MainScreen = (props) => {
         contenMarginTop={220}
         content=
         {
-          <div className="floor-box">
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 5,
-              gridColumnStart: 1,
-              gridColumnEnd: 5,
-            }}><p>Hall 1</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 3,
-              gridColumnStart: 5,
-              gridColumnEnd: 8,
-            }}><p>Hall 2</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 3,
-              gridColumnStart: 8,
-              gridColumnEnd: 12,
-            }}><p>Hall 3</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 5,
-              gridColumnStart: 12,
-              gridColumnEnd: 14,
-            }}><p>Hall 4</p></div>
-            <div className="hall" style={{
-              gridRowStart: 3,
-              gridRowEnd: 5,
-              gridColumnStart: 7,
-              gridColumnEnd: 10,
-            }}><p>Hall 5</p></div>
-            <div className="hall" style={{
-              gridRowStart: 5,
-              gridRowEnd: 7,
-              gridColumnStart: 1,
-              gridColumnEnd: 4,
-            }}><p>Hall 6</p></div>
-            <div className="hall" style={{
-              gridRowStart: 3,
-              gridRowEnd: 5,
-              gridColumnStart: 10,
-              gridColumnEnd: 12,
-            }}><p>Hall 7</p></div>
-            <div className="hall" style={{
-              gridRowStart: 5,
-              gridRowEnd: 7,
-              gridColumnStart: 8,
-              gridColumnEnd: 11,
-            }}><p>Hall 8</p></div>
-            <div className="hall" style={{
-              gridRowStart: 5,
-              gridRowEnd: 7,
-              gridColumnStart: 11,
-              gridColumnEnd: 14,
-            }}><p>Hall 9</p></div>
+          <div className="floor-box floor2">
+            {hallsF2.map((hall,index) =>
+              {
+                return(<div key={hall.id} style={{gridArea:`hall${index+1}`}} className="hall"><p>Hall {index+1}</p></div>)
+              })}            
           </div>
         }
       >
       </InformationBox>
       <InformationBox
-        image={floor3Image}
+        image={floor2Image}
         header=
         {
           <p>
@@ -187,43 +121,11 @@ const MainScreen = (props) => {
         contenMarginTop={220}
         content=
         {
-          <div className="floor-box">
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 7,
-              gridColumnStart: 1,
-              gridColumnEnd: 5,
-            }}><p>Hall 1</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 5,
-              gridColumnStart: 7,
-              gridColumnEnd: 10,
-            }}><p>Hall 2</p></div>
-            <div className="hall" style={{
-              gridRowStart: 1,
-              gridRowEnd: 3,
-              gridColumnStart: 10,
-              gridColumnEnd: 14,
-            }}><p>Hall 3</p></div>
-            <div className="hall" style={{
-              gridRowStart: 3,
-              gridRowEnd: 5,
-              gridColumnStart: 10,
-              gridColumnEnd: 12,
-            }}><p>Hall 4</p></div>
-            <div className="hall" style={{
-              gridRowStart: 3,
-              gridRowEnd: 7,
-              gridColumnStart: 12,
-              gridColumnEnd: 14,
-            }}><p>Hall 5</p></div>
-            <div className="hall" style={{
-              gridRowStart: 5,
-              gridRowEnd: 7,
-              gridColumnStart: 8,
-              gridColumnEnd: 12,
-            }}><p>Hall 6</p></div>
+          <div className="floor-box floor3">
+            {hallsF3.map((hall,index) =>
+              {
+                return(<div key={hall.id} style={{gridArea:`hall${index+1}`}} className="hall"><p>Hall {index+1}</p></div>)
+              })}            
           </div>
         }
       >

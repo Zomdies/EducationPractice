@@ -25,6 +25,23 @@
 }
 
 
+.card.chooseabel
+{
+    transition: ease-in-out 0.3s;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* .card.chooseabel:active
+{
+    box-shadow: 0px 0px 20px rgba(187, 187, 187, 0.8);
+} */
+
+.card.chooseabel:focus 
+{
+    outline: none;
+    box-shadow: 0px 0px 20px rgba(187, 187, 187, 0.8);
+}
+
 .card-container
 {   
     position: relative;
